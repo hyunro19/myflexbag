@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org/DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.vo.UserVO" alias="user"/>
+		<typeAlias type="com.vo.BoardVO" alias="board"/>
+		<typeAlias type="com.vo.ItemVO" alias="item"/>
+		<typeAlias type="com.vo.PageVO" alias="page"/>
+		<typeAlias type="com.vo.CartVO" alias="cart"/>
+		<typeAlias type="com.vo.OrderVO" alias="order"/>
+		<typeAlias type="com.vo.OrderDetailVO" alias="odetail"/>
+		<typeAlias type="com.vo.ReviewVO" alias="review"/>
+		
+		
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="com/mybatis/usermapper.xml"/>
+		<mapper resource="com/mybatis/boardmapper.xml" />
+		<mapper resource="com/mybatis/itemmapper.xml"/>
+		<mapper resource="com/mybatis/pagemapper.xml"/>
+		<mapper resource="com/mybatis/cartmapper.xml"/>
+		<mapper resource="com/mybatis/ordermapper.xml"/>
+		<mapper resource="com/mybatis/orderdetailmapper.xml"/>
+		<mapper resource="com/mybatis/reviewmapper.xml"/>
+	</mappers>
+</configuration>
+
+
+
+
+
+

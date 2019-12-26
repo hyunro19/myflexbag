@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.CartMapper">
+   
+   <insert id="insert" parameterType="cart">
+	INSERT INTO lcart (cartno, 
+    userid,
+    pid, 
+    pname,
+    pnum,
+    cdate,
+    img,
+    price)
+SELECT SEQ_CARTNO.NEXTVAL,
+     userid,
+    pid, 
+    pname,
+    pnum,
+    cdate,
+    img,
+    price
+  FROM (SELECT #{userid} userid,
+               #{pid} pid,
+               pname pname,
+               #{pnum} pnum,
+               sysdate cdate,
+               img1 img,
+               price price
+from lproduct where pid = #{pid})
+
+   </insert>
+   
+   <delete id="delete" parameterType="String">
+      <!-- DELETE FROM LCART WHERE PID=#{pid} -->
+      DELETE FROM LCART WHERE CARTNO=#{cartno}
+   </delete>
+
+   <update id="update" parameterType="cart">
+      UPDATE LCART SET PNUM=#{pnum} WHERE PID=#{pid} AND USERID=#{userid}
+   </update>
+   
+   <select id="select" parameterType="Integer" 
+	resultType="cart">
+		SELECT * FROM LCART WHERE PID=#{pid}	
+	</select>
+   
+   <delete id="clear">
+      DELETE * FROM LCART 
+   </delete>
+
+   <select id="selectall" resultType="cart">
+      SELECT * FROM LCART WHERE userid =#{userid}
+   </select>
+   
+</mapper>
+
+

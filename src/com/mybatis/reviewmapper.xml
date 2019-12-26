@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mapper.ReviewMapper">
+
+	<select id="selectall" resultType="review" parameterType="review">
+		SELECT * FROM Lreview WHERE 1=1
+		<if test="pid != 0"> AND  pid = #{pid}	</if>
+		<if test="userid != null"> AND USERID=#{userid}	</if>
+		ORDER BY rvdate DESC
+	</select>
+
+	<insert id="insert" parameterType="review">
+	INSERT INTO LREVIEW (rvno,pid, pname,userid,	rvdate,	rvtitle,	rvcon)
+	SELECT seq_review.nextval, #{pid}, pname, #{userid}, sysdate, #{rvtitle},#{rvcon} FROM Lproduct WHERE pid = #{pid}
+	</insert>
+	
+	<select id="select" parameterType="String" resultType="review">
+		SELECT * FROM Lreview WHERE rvno=#{rvno}	
+	</select>
+	
+		<delete id="delete" parameterType="String">
+		DELETE FROM Lreview WHERE rvno=#{rvno}
+	</delete>
+	
+		<update id="update" parameterType="review">
+		UPDATE LREVIEW SET RVTITLE=#{rvtitle},RVCON=#{rvcon} WHERE RVNO=#{rvno}		
+	</update>
+
+
+</mapper>

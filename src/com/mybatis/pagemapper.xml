@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.PageMapper">
+	
+	<insert id="insert" parameterType="item">
+		INSERT INTO Lproduct VALUES (Lproduct_seq.nextval,#{cateid},#{sizeid},#{colorid},#{brandid},#{matid},#{pname},#{price},#{pstock},sysdate,#{img1},#{img2},#{img3},#{img4},#{img5})	
+	</insert>
+	
+	<update id="update" parameterType="item">
+		UPDATE Lproduct SET 
+			cateid=#{cateid},sizeid=#{sizeid},colorid=#{colorid},brandid=#{brandid},matid=#{matid},pname=#{pname},price=#{price},pstock=#{pstock},img1=#{img1},img2=#{img2},img3=#{img3},img4=#{img4},img5=#{img5}
+		WHERE PID=#{pid}
+	</update>
+	
+	<delete id="delete" parameterType="String">
+		DELETE FROM Lproduct WHERE PID=#{pid}
+	</delete>
+	
+	<select id="select" parameterType="String" resultType="page">
+		SELECT count(*) totalcount FROM Lproduct		
+	</select>
+	
+	<select id="selectall" resultType="page">
+		SELECT count(*) totalcount FROM Lproduct WHERE 1 = 1
+		<if test="cateid != null"> AND  cateid = #{cateid}	</if>
+		<if test="cateid == ''"> </if>
+		
+		<if test="brandid != null"> AND  brandid = #{brandid}	</if>
+		<if test="brandid == ''"> </if>
+
+		<if test="matid != null"> AND  matid = #{matid}	</if>
+		<if test="matid == ''"> </if>
+				
+		<if test="sortcon == 'popularity'"> ORDER BY pstock ASC </if> 
+		<if test="sortcon == 'pdate'"> ORDER BY pdate DESC	</if> 
+		<if test="sortcon == 'priceasc'"> ORDER BY price ASC </if> 
+		<if test="sortcon == 'pricedesc'"> ORDER BY price DESC </if> 
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

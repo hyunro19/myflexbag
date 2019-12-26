@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.OrderDetailMapper">
+
+	<!-- 주문 상세 정보 -->
+	<insert id="insert">	
+		INSERT INTO LDETAIL VALUES (seq_odno.nextval, #{orderno}, #{pid}, #{unitprice}, #{quantity}, #{mprice})
+	</insert>
+
+	<delete id="clear">
+		DELETE * FROM LORDER
+	</delete>
+
+	<select id="selectallorder" resultType="odetail">
+		SELECT * FROM LORDER
+	</select>
+
+	   <select id="selectall" resultType="odetail">
+      SELECT * FROM LDETAIL where ORDERNO=#{orderno} ORDER BY orderdetailno DESC
+   </select>
+
+</mapper>
+
+
+
