@@ -91,18 +91,17 @@ public class ItemController {
 	}
 	
 	@RequestMapping("/idetail.mc")
-	public ModelAndView detail(ModelAndView mv, PageVO pagevo, ItemVO item, ReviewVO rv) {
+	public ModelAndView detail(ModelAndView mv, ItemVO item, PageVO pagevo, ReviewVO rv) {
 //		ItemVO item = null;
 		ArrayList<ReviewVO> reviewList;
 		try {
+			item = service.get(""+item.getPid());
+			reviewList = rservice.getall(rv);
+			
 			mv.addObject("pagevo",pagevo);
 			mv.addObject("pagelink",pagevo.getListLink());
-			reviewList = rservice.getall(rv);
-			mv.addObject("reviewList", reviewList);
-			
-			item = service.get(""+item.getPid());
 			mv.addObject("ditem", item);
-			
+			mv.addObject("reviewList", reviewList);
 			mv.addObject("center", "item/detail");
 			mv.setViewName("main");
 		} catch (Exception e) {
@@ -112,18 +111,19 @@ public class ItemController {
 	}
 	
 	@RequestMapping("/ilist.mc")
-	public ModelAndView list(HttpServletRequest reqeust, ModelAndView mv, ItemVO vo, PageVO pagevo) { //String cateid,
+	public ModelAndView list(ModelAndView mv, ItemVO vo, PageVO pagevo) { //String cateid,
 
 		ArrayList<ItemVO> list = null;
 		ArrayList<PageVO> plist = null;
 		try {
-			mv.addObject("pagelink",pagevo.getListLink());
-			mv.addObject("pageprev",pagevo);
+			mv.addObject("pageprev",pagevo); // 이전 페이지 정보 pagevo
+			mv.addObject("pagelink",pagevo.getListLink()); // 이전 페이지 url정보
+
 			list = service.getall(vo);
 			plist = pservice.getall(pagevo);
-			pagevo = plist.get(0); 
+			pagevo = plist.get(0); // 새 페이지 정보 pagevo
 			pagevo.calcData(vo.getPage(), vo.getPerPageNum());
-			mv.addObject("vo", vo);
+
 			mv.addObject("pagevo", pagevo);	
 			mv.addObject("ilist", list);
 			mv.addObject("center", "item/list");

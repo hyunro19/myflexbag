@@ -81,7 +81,6 @@ public class ReviewConroller {
 	
 	@RequestMapping(value="/review_updateimpl.mc",method=RequestMethod.POST)
 	public String updateimpl(ReviewVO review) throws Exception {
-
 		service.modify(review);
 		String rvno = ""+review.getRvno();
 		return "redirect:review_detail.mc?rvno="+rvno;

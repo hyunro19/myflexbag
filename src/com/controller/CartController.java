@@ -27,7 +27,7 @@ public class CartController {
 
 	@Resource(name = "cservice")
 	Service<String, CartVO> service;
-//하림--------------------------
+
 	@Resource(name="oservice")
 	ServiceO<String, OrderVO> oservice;
 	
@@ -36,19 +36,16 @@ public class CartController {
 	
 	@Resource(name="odservice")
 	Service<String, OrderDetailVO> odservice;
-	//하림--------------------------
 	
 	@ResponseBody
 	@RequestMapping(value = "/cadd.mc", method = RequestMethod.POST)
 	public int addCart(HttpSession session, CartVO vo) throws Exception {
-		
 		int result = 0;
 		int pid = vo.getPid();
 		if(session.getAttribute("loginid") != null) {
 			vo.setUserid((String)session.getAttribute("loginid"));
 			ArrayList<CartVO> clist = service.getall(vo);
 
-			//동욱
 			boolean flag = false;
 			for (CartVO cvo : clist) {
 				flag = false;
@@ -63,8 +60,7 @@ public class CartController {
 			}
 			if(flag || clist.size()==0 ) service.register(vo);
 			result = 1;
-		}
-		
+		}		
 		return result;
 	}
 	
@@ -89,7 +85,6 @@ public class CartController {
 		return mv;
 	}
 
-	// 선택 삭제 만들기
 	@ResponseBody
 	@RequestMapping(value = "/deleteCart.mc", method = RequestMethod.POST)
 	public int deleteCart(HttpSession session, @RequestParam(value = "chbox[]") List<String> chArr, CartVO vo)
@@ -97,14 +92,11 @@ public class CartController {
 		int result = 0;
 		if(session.getAttribute("loginid") == null) {
 			return  result;
-			// 로그인 안된채로 삭제하려고 하면 안되도록 조치 코드를 여기에 넣자
 		};
-		
+	
 		String cartNum;
-		//chbox[] = ["653", "172"] 같은 carno(Lcart table의 seq)가 들어간 String 배열
-
-		for (String i : chArr) { // 에이젝스에서 받은 chArr의 갯수만큼 반복
-			cartNum = i; // i번째 데이터를 cartNum에 저장
+		for (String i : chArr) { 
+			cartNum = i; 
 			service.remove(cartNum);
 		}
 		result = 1;
@@ -112,34 +104,26 @@ public class CartController {
 	}
 
 	@RequestMapping("/cupdate.mc")
-	public String updateCart(@RequestParam int amount, @RequestParam int productId, @RequestParam String userId) {
-//		String userId=(String) session.getAttribute("loginid");
-	
+	public String updateCart(int amount, int productId, String userId) {
 			CartVO vo = null;
 			String pnum = String.valueOf(productId);
 			try {
 				vo = service.get(pnum);
 				vo.setPid(productId);
 				vo.setUserid(userId);
-				vo.setPnum(amount);
-				
+				vo.setPnum(amount);				
 				service.modify(vo);
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-		
 		return "redirect:/clist.mc";
 	}
 	
-	
-	//주문화면으로 넘어가기
 	@RequestMapping("/orderCart.mc")
 	public ModelAndView orderCart(HttpSession session, ModelAndView mv, 
 			@RequestParam(value="amount", defaultValue="0", required=false) int amount, CartVO vo, UserVO user) {
 		
 		ArrayList<CartVO> list = null;
-		
 		String userid = (String)session.getAttribute("loginid");
 		vo.setUserid(userid);
 		try {
@@ -153,56 +137,35 @@ public class CartController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return mv;
 	}
 	
-	//order table이랑 order detail table에 정보 넣기, order detail화면으로 넘어가기 
 	@RequestMapping("/order.mc")
 	public ModelAndView order(HttpServletRequest request, ModelAndView mv, CartVO cv, UserVO uv, 
 			@RequestParam(value="amount", defaultValue="0", required=false) int amountSum, 
 			HttpSession session, OrderVO od, OrderDetailVO odt) {
-//			String userAddr1, String userAddr2, String userAddr3, 
-		
-		//pricesum은 amount
-		//quantitysum(sum)은 cart table의 pnum을 for문으로 더하기
 		ArrayList<CartVO> cartList = null;
 		ArrayList<OrderDetailVO> orderDetailList = null;
 		
 		int quantitySum = 0;
 		try {
 			String userid = (String)session.getAttribute("loginid");
-			cv.setUserid(userid); //sesstion에서 가져온 id 갖고 cartvo에 set
-			cartList = service.getall(cv); //cartvo를 arraylist 형태로 cartList에 넣기
+			cv.setUserid(userid); 
+			cartList = service.getall(cv);
 			od.setCartList(cartList);
 			
-			uv = uservice.get(userid); //uservo에서 cartvo의 userid 일치하는 애를 가져와서 uv에 넣기
-			String gender = uv.getGender(); //gender 호출
+			uv = uservice.get(userid); 
+			String gender = uv.getGender(); 
 			
-			//quantitySum 계산
+
 			for(int i=0; i<cartList.size(); i++) {
 				CartVO cartItem = cartList.get(i); 
-				quantitySum += cartItem.getPnum();	//cartList에서 호출
+				quantitySum += cartItem.getPnum();	
 			}
 			
-			//주문페이지에서 입력받은 내용 호출
-//			String payid = request.getParameter("payid");
-//			String receiver = request.getParameter("receiver");
-//			String address1 = request.getParameter("userAddr1");
-//			String address2 = request.getParameter("userAddr2");
-//			String address3 = request.getParameter("userAddr3");
-//			String address = userAddr1 + " "+ userAddr2 +" "+ userAddr3;
-			//입력받은 주소 호출하여 이어붙이기
-			
-			//배송현황 은 배송중으로 sql에 박아버림
-//			od.setPayid(payid);
-//			od.setReceiver(receiver);
-			
-			//order 테이블에 값 입력
-//			od.setAddress(address);
 			od.setUserid(userid);
 			od.setQuantitysum(quantitySum);
-			od.setPricesum(amountSum);	//getParam  사용	
+			od.setPricesum(amountSum);
 			od.setGender(gender);
 			
 			int orderno = oservice.register(od);
@@ -217,15 +180,12 @@ public class CartController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return mv;
 	}
 	
-	  //주문배송조회
 	   @RequestMapping("/ordercheck.mc")
 	   public ModelAndView orderCheck(HttpSession session, ModelAndView mv, OrderVO od) {
-	      ArrayList<OrderVO> orderList = null;
-	      
+	      ArrayList<OrderVO> orderList = null;	      
 	      String userid = (String)session.getAttribute("loginid");
 	      try {
 	         od.setUserid(userid);
@@ -236,13 +196,9 @@ public class CartController {
 	      } catch (Exception e) {
 	         e.printStackTrace();
 	      }
-
 	      return mv;
 	   }
 	   
-
-
-	//주문배송조회의 상세내역 
 	@RequestMapping("/ordercheckview.mc")
 	public ModelAndView orderCheckView(HttpSession session, ModelAndView mv, OrderDetailVO odt) {
 	   ArrayList<OrderDetailVO> ordercheckview = null;

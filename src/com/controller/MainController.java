@@ -42,9 +42,8 @@ public class MainController {
 	}
 	
 	@RequestMapping("/logout.mc")
-	public ModelAndView logout(HttpServletRequest request) {
+	public ModelAndView logout(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		HttpSession session = request.getSession();
 		if (session != null) {
 			session.invalidate();
 		}
@@ -53,7 +52,7 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = "/login.mc", method = RequestMethod.POST)
-	public ModelAndView loginimpl(UserVO dbuser, ModelAndView mv,HttpServletRequest request,HttpServletResponse response, HttpSession session, String userid, String pwd)
+	public ModelAndView loginimpl(UserVO dbuser, ModelAndView mv, HttpServletResponse response, HttpSession session, String userid, String pwd)
 			throws Exception {
 		dbuser = service.get(userid);
 		try {

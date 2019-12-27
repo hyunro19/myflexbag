@@ -119,13 +119,7 @@ public class UserController {
 		if ( vo.getUserid()==real.getUserid() && vo.getPhone()==real.getPwd()) {
 			data = true;
 		} else {
-//			response.setContentType("text/html;charset=utf-8");
-//			PrintWriter out = response.getWriter();
-//			out.println("<script>");
-//			out.println("alert('비밀번호를 확인해주세요');");
-//			out.println("history.go(-1);");
-//			out.println("</script>");
-//			out.close();
+
 		}
 		return data;
 	}
@@ -166,36 +160,6 @@ public class UserController {
 		return mv;
 	}
 	
-//	@RequestMapping("/ulist.mc")
-//	public ModelAndView list(ModelAndView mv) {
-//
-//		ArrayList<UserVO> list = null;
-//		try {
-//			list = service.getall();
-//			mv.addObject("ulist", list);
-//			mv.addObject("center", "user/list");
-//			mv.setViewName("main");
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//
-//		return mv;
-//	}
-//	
-//	@RequestMapping("/udetail.mc")
-//	public ModelAndView detail(ModelAndView mv,
-//			String id) {
-//		UserVO user = null;
-//		try {
-//			user = service.get(id);
-//			mv.addObject("duser", user);
-//			mv.addObject("center", "user/detail");
-//			mv.setViewName("main");
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return mv;
-//	}
 	
 	@RequestMapping("/ulist.mc")
 	public ModelAndView list(ModelAndView mv, UserVO vo) {
@@ -213,7 +177,6 @@ public class UserController {
 
 		return mv;
 	}
-	
 
 	@ResponseBody
 	@RequestMapping(value = "/idChk.mc", method = RequestMethod.POST)
