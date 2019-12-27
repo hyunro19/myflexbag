@@ -17,9 +17,9 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT * FROM LORDER
 	</select>
 
-	   <select id="selectall" resultType="odetail">
-      SELECT * FROM LDETAIL where ORDERNO=#{orderno} ORDER BY orderdetailno DESC
-   </select>
+	<select id="selectall" resultType="odetail">
+    	SELECT * FROM LDETAIL where ORDERNO=#{orderno} ORDER BY orderdetailno DESC
+   	</select>
 
 </mapper>
 

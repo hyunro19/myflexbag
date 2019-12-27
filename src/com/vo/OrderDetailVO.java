@@ -4,10 +4,10 @@ public class OrderDetailVO {
 	int orderdetailno;
 	String orderno;
 	int pid;
-	int unitprice;//�ܰ�
-	int quantity; //����
+	int unitprice;
+	int quantity;
 	
-	int mprice; //��ǰ���ݾ�
+	int mprice;
 
 	public int getOrderdetailno() {
 		return orderdetailno;
@@ -62,8 +62,5 @@ public class OrderDetailVO {
 		return "OrderDetailVO [orderdetailno=" + orderdetailno + ", orderno=" + orderno + ", pid=" + pid
 				+ ", unitprice=" + unitprice + ", quantity=" + quantity + ", mprice=" + mprice + "]";
 	}
-	
-	
-	
 	
 }

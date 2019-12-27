@@ -17,7 +17,6 @@ public class OrderVO {
 	String gender;
 	ArrayList<CartVO> cartList;
 	
-	
 	public ArrayList<CartVO> getCartList() {
 		return cartList;
 	}

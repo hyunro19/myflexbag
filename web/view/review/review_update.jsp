@@ -6,8 +6,7 @@
 <div class="centermain">
 	<form action="review_updateimpl.mc" method="post">
 
-	<input type = "hidden" name="rvno" value="${ureview.rvno}">
-		
+		<input type = "hidden" name="rvno" value="${ureview.rvno}">
 		
 		<label>작성자</label> 
 		<div class="div_text">

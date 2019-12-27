@@ -6,15 +6,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MY FLEX BAG</title>
-	<script src='view/js/jquery.js'></script>
-	<script src='view/js/plugins.js'></script>
-	<script src='view/js/scripts.js'></script>
-	<script src='view/js/masonry.pkgd.min.js'></script>
-	<script src='view/js/bootstrap.min.js'></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<style>
 
-</style>
+<script src='view/js/jquery.js'></script>
+<script src='view/js/plugins.js'></script>
+<script src='view/js/scripts.js'></script>
+<script src='view/js/masonry.pkgd.min.js'></script>
+<script src='view/js/bootstrap.min.js'></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
 <link rel='stylesheet' href='view/css/woocommerce-layout.css' type='text/css' media='all'/>
 <link rel='stylesheet' href='view/css/woocommerce-smallscreen.css' type='text/css' media='only screen and (max-width: 768px)'/>
@@ -24,6 +22,7 @@
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Oswald:400,500,700%7CRoboto:400,500,700%7CHerr+Von+Muellerhoff:400,500,700%7CQuattrocento+Sans:400,500,700' type='text/css' media='all'/>
 <link rel='stylesheet' href='view/css/bootstrap-theme.min.css' type='text/css' media='all'/>
 <link rel='stylesheet' href='view/css/bootstrap.css' type='text/css' media='all'/>
+
 <script>
 	window.onload = function(){
 		$(".single_add_to_cart_button").click(function(){
@@ -48,10 +47,8 @@
 				});
 		}
 </script>
-
 </head>
-<!-- archive post-type-archive post-type-archive-product woocommerce woocommerce-page
-<body class="home page page-template page-template-template-portfolio page-template-template-portfolio-php"> -->
+
 <body class="archive post-type-archive post-type-archive-product woocommerce woocommerce-page">
 <div id="page">
 	<div class="container">
@@ -71,6 +68,7 @@
 						</c:otherwise>
 					</c:choose>
 				</ul>
+
 				<div class="site-branding">
 					<div id="logo">
 						<a href="main.mc"><img src="view/img/title.jpg"></a>
@@ -78,12 +76,15 @@
 					<br>
 					<h2 class="site-description">Luxury bags for Men</h2>
 				</div>
+
 				<nav id="site-navigation" class="main-navigation">
 					<button class="menu-toggle">Menu</button>
+
 					<script>$('#site-navigation').click( function(){
 							$(this).toggleClass("toggled");
 					});
 					</script>
+
 					<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
 					<div class="menu-menu-1-container">
 						<ul id="menu-menu-1" class="menu nav-menu">
@@ -133,7 +134,7 @@
 			<div id="content" class="site-content">
 			<div id="primary" class="content-area column full">
 			<main id="main" class="site-main" role="main">
-			<!-- -------------------------------센터 위치 지정 by 여진 --------------------------- -->
+			<!-- center area -->
 
 				<c:choose>
 					<c:when test="${center == null }">
@@ -144,13 +145,13 @@
 					</c:otherwise>
 				</c:choose> 
 
-			<!-- -------------------------------센터 위치 지정 by 여진 --------------------------- -->
-						</main>
+			<!-- center area -->
+			</main>
 		</div>
 		<!-- #content -->
 		</div>
 		</div>
-		<!-- .container -->
+		<!-- container -->
 		<footer id="colophon" class="site-footer">
 		</footer>
 		<a href="#top" class="smoothup" title="Back to top"><span

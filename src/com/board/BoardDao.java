@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.board;
 
 import java.util.ArrayList;
@@ -33,7 +30,6 @@ public class BoardDao implements Dao<String, BoardVO> {
 	@Override
 	public void update(BoardVO v) throws Exception {
 		bm.update(v);
-		
 	}
 
 	@Override
@@ -41,14 +37,8 @@ public class BoardDao implements Dao<String, BoardVO> {
 		return bm.select(k);
 	}
 
-//	@Override
-//	public ArrayList<BoardVO> select() throws Exception {
-//		return bm.BoardList();
-//	}
-
 	@Override
 	public ArrayList<BoardVO> selectall(BoardVO v) throws Exception {
-		// TODO Auto-generated method stub
 		return bm.selectall(v);
 	}
 

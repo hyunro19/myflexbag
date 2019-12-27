@@ -20,35 +20,33 @@
 					<tr>
 						<td>${value.count }</td>
 						<td>
-									<c:choose>
-									<c:when test="${blist.bkind == 'product' }">
-										상품문의
-									</c:when>
-									<c:when test="${blist.bkind == 'delivery' }">
-										배송문의
-									</c:when>
-									<c:when test="${blist.bkind == 'beforedel' }">
-										배송전취소·변경
-									</c:when>
-									<c:when test="${blist.bkind == 'afterdel' }">
-										배송후교환·반품
-									</c:when>
-									<c:when test="${blist.bkind == 'defect' }">
-										불량및오배송
-									</c:when>
-									<c:otherwise>
-										기타
-									</c:otherwise>
-								</c:choose>
+							<c:choose>
+								<c:when test="${blist.bkind == 'product' }">
+									상품문의
+								</c:when>
+								<c:when test="${blist.bkind == 'delivery' }">
+									배송문의
+								</c:when>
+								<c:when test="${blist.bkind == 'beforedel' }">
+									배송전취소·변경
+								</c:when>
+								<c:when test="${blist.bkind == 'afterdel' }">
+									배송후교환·반품
+								</c:when>
+								<c:when test="${blist.bkind == 'defect' }">
+									불량및오배송
+								</c:when>
+								<c:otherwise>
+									기타
+								</c:otherwise>
+							</c:choose>
 						</td>
 						<td><a href="qna_view.mc?bno=${blist.bno}">${blist.btitle}</a></td>
 						<td>${blist.bdate}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
-
 		</table>
-		
 				<h1>Review</h1>
 		<table>
 			<thead>

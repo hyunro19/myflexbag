@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
     cdate,
     img,
     price)
-SELECT SEQ_CARTNO.NEXTVAL,
+   SELECT SEQ_CARTNO.NEXTVAL,
      userid,
     pid, 
     pname,
@@ -21,19 +21,17 @@ SELECT SEQ_CARTNO.NEXTVAL,
     cdate,
     img,
     price
-  FROM (SELECT #{userid} userid,
+   FROM (SELECT #{userid} userid,
                #{pid} pid,
                pname pname,
                #{pnum} pnum,
                sysdate cdate,
                img1 img,
                price price
-from lproduct where pid = #{pid})
-
+   from lproduct where pid = #{pid})
    </insert>
    
    <delete id="delete" parameterType="String">
-      <!-- DELETE FROM LCART WHERE PID=#{pid} -->
       DELETE FROM LCART WHERE CARTNO=#{cartno}
    </delete>
 
@@ -45,10 +43,6 @@ from lproduct where pid = #{pid})
 	resultType="cart">
 		SELECT * FROM LCART WHERE PID=#{pid}	
 	</select>
-   
-   <delete id="clear">
-      DELETE * FROM LCART 
-   </delete>
 
    <select id="selectall" resultType="cart">
       SELECT * FROM LCART WHERE userid =#{userid}

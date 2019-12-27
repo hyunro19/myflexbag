@@ -5,8 +5,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 <mapper namespace="com.mapper.BoardMapper">
 	
 	<insert id="insert" parameterType="board">
-		INSERT INTO LBOARD
-		(bno,userid,bkind,bdate,btitle,bcon)
+		INSERT INTO LBOARD (bno,userid,bkind,bdate,btitle,bcon)
 		VALUES (seq_bno.nextval,#{userid}, #{bkind},sysdate,#{btitle},#{bcon})
 	</insert>
 	

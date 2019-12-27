@@ -22,12 +22,9 @@
 		<c:if test="${msg == false}">
 			<p style="color: red;">로그인에 실패하였습니다! 아이디와 비밀번호 확인해주세요.</p>
 		</c:if>
-	</form>
-		<br>
-		<br>
-		<br>
-		<label for="registermsg">회원이 아니신가요?</label>
-		<br>
+	</form> <br><br><br>
+	
+		<label for="registermsg">회원이 아니신가요?</label><br>
 		<div class=div_text>
 		<a href="uadd.mc"><button type="button">REGISTER</button></a>
 		</div>

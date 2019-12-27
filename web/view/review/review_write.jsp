@@ -4,15 +4,12 @@
 <textarea style="resize: none;"></textarea>
 <script>
 	function form_Chk() {
-
 		var form = document.writeinfo;
-
 		if (!form.rvtitle.value) {
 			alert("제목을 입력하세요.");
 			form.rvtitle.focus();
 			return false;
 		}
-
 	};
 </script>
 <body>
@@ -20,7 +17,6 @@
 		<h2>Review</h2>
 		<form method="post" action="review_write.mc" name="writeinfo" >
 
-			
 			<label>작성자</label> 
 			<div class="div_text">
 			<input type="text" name="userid" value="${loginid}" readonly><br>

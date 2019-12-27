@@ -12,8 +12,6 @@ PUBLIC "-//mybatis.org/DTD Config 3.0//EN"
 		<typeAlias type="com.vo.OrderVO" alias="order"/>
 		<typeAlias type="com.vo.OrderDetailVO" alias="odetail"/>
 		<typeAlias type="com.vo.ReviewVO" alias="review"/>
-		
-		
 	</typeAliases>
 	
 	<mappers>

@@ -35,11 +35,6 @@ public class PageVO {
 		prev = startPage ==1 ? false : true;
 		next = endPage * perPageNum >= totalCount ? false : true;
 	}
-	
-	
-	
-	
-	
 	public int getStartPage() {
 		return startPage;
 	}
@@ -87,8 +82,6 @@ public class PageVO {
 		return "PageVO [totalCount=" + totalCount + ", startPage=" + startPage + ", endPage=" + endPage + ", prev="
 				+ prev + ", next=" + next + ", displayPageNum=" + displayPageNum + "]";
 	}
-
-	
 	
 	private String cateid;
 	private String sizeid;

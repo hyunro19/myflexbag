@@ -5,10 +5,8 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 <mapper namespace="com.mapper.UserMapper">
 	
 	<insert id="insert" parameterType="user">
-		
-		INSERT INTO USERS
-      			(userid, pwd, uno, uname,gender,phone,email,address,birthdate)
-      		  VALUES (#{userid}, #{pwd},seq_user.nextval,#{uname},#{gender}, #{phone}, #{email}, #{address},#{birthdate})
+		INSERT INTO USERS (userid, pwd, uno, uname,gender,phone,email,address,birthdate)
+      		  	VALUES (#{userid}, #{pwd},seq_user.nextval,#{uname},#{gender}, #{phone}, #{email}, #{address},#{birthdate})
 	</insert>
 	
 	<update id="update" parameterType="user">
@@ -32,16 +30,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<select id="selectall" resultType="user">
 		SELECT * FROM USERS 
 	</select>
-	
-	<select id = "idCheck" parameterType="String" resultType="int">
-	SELECT COUNT(*) FROM USERS WHERE USERID=#{userid}
-	</select>
-	
-	<select id = "login" resultType="com.vo.UserVO">
-	SELECT USERID,PWD FROM USERS WHERE USERID=#{userid} AND PWD=#{pwd}
-	</select>
-
-	
+		
 </mapper>
 
 

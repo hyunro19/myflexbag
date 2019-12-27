@@ -17,7 +17,6 @@ public class ReviewService implements Service<String, ReviewVO> {
 	@Override
 	public void register(ReviewVO v) throws Exception {
 		dao.insert(v);
-		
 	}
 
 	@Override

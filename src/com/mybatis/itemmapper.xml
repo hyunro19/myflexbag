@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	
 	<update id="update" parameterType="item">
 		UPDATE Lproduct SET 
-			cateid=#{cateid},sizeid=#{sizeid},colorid=#{colorid},brandid=#{brandid},matid=#{matid},pname=#{pname},price=#{price},pstock=#{pstock},img1=#{img1},img2=#{img2},img3=#{img3},img4=#{img4},img5=#{img5}
+		cateid=#{cateid},sizeid=#{sizeid},colorid=#{colorid},brandid=#{brandid},matid=#{matid},pname=#{pname},price=#{price},pstock=#{pstock},img1=#{img1},img2=#{img2},img3=#{img3},img4=#{img4},img5=#{img5}
 		WHERE PID=#{pid}
 	</update>
 	

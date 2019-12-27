@@ -12,17 +12,13 @@ import com.vo.UserVO;
 
 @org.springframework.stereotype.Service("bservice")
 public class BoardService implements Service<String, BoardVO> {
-
 	
 @Inject
 private BoardDao dao;
-
-	
 	
 	@Override
 	public void register(BoardVO v) throws Exception {
 		dao.insert(v);
-		
 	}
 
 	@Override
@@ -34,24 +30,15 @@ private BoardDao dao;
 	@Override
 	public void modify(BoardVO v) throws Exception {
 		dao.update(v);
-		
 	}
 
 	@Override
 	public BoardVO get(String k) throws Exception {
-		// TODO Auto-generated method stub
 		return dao.select(k);
 	}
 
-//	@Override
-//	public ArrayList<BoardVO> get() throws Exception {
-//		
-//		return dao.select();
-//	}
-
 	@Override
 	public ArrayList<BoardVO> getall(BoardVO v) throws Exception {
-		// TODO Auto-generated method stub
 		return dao.selectall(v);
 	}
 

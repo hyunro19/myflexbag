@@ -1,13 +1,12 @@
 package com.item;
 
 import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import com.frame.Dao;
 import com.mapper.ItemMapper;
 import com.vo.ItemVO;
+
 @Repository("idao")
 public class ItemDao implements Dao<String, ItemVO> {
 
@@ -36,7 +35,6 @@ public class ItemDao implements Dao<String, ItemVO> {
 
 	@Override
 	public ArrayList<ItemVO> selectall(ItemVO v) throws Exception {
-		
 		return im.selectall(v);
 	}
 	

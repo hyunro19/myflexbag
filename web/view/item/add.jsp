@@ -7,7 +7,7 @@
 상품 이름<input type="text" name="pname"><br>
 가격(KRW)<input type="number" name="price"><br>
 재고(EA)<input type="number" name="pstock"><br>
-카테<select name="cateid">
+카테고리<select name="cateid">
 	<option value="shoulder">숄더</option>
 	<option value="tote">토트</option>
 	<option value="backpack">백팩</option>

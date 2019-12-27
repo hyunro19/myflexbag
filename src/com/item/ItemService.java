@@ -1,12 +1,11 @@
 package com.item;
 
 import java.util.ArrayList;
-
 import javax.annotation.Resource;
-
 import com.frame.Dao;
 import com.frame.Service;
 import com.vo.ItemVO;
+
 @org.springframework.stereotype.Service("iservice")
 public class ItemService implements Service<String, ItemVO> {
 
@@ -21,13 +20,11 @@ public class ItemService implements Service<String, ItemVO> {
 	@Override
 	public void remove(String k) throws Exception {
 		dao.delete(k);
-		
 	}
 
 	@Override
 	public void modify(ItemVO v) throws Exception {
 		dao.update(v);
-		
 	}
 
 	@Override

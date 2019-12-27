@@ -62,46 +62,19 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation" value="classpath:com/mybatis/mybatis.xml" />
-		<!-- property로 정보를 주변 SqlSessionFactoryBean객체가 SqlSession객체를 생성 p513-->
+		
 	</bean>
 
 	<!-- 4. Spring Mybatis Connect -->
-	<!-- 5번쓰면 얘 안써도 됨. 1번 → 3번 → 4번 순으로 주입, 이 클래스는 setter가 없어서 constructor DI만 가능
-		위에는 constructor주입으로 sqlSessionFactory를 매칭시켜줬지만, 사실 sqlSessionFactory랑 sqlSessionTemplate은 alternative다.
-		This configurer enables autowire for all the beans that it creates
-		so that they are automatically autowired with the proper SqlSessionFactory or SqlSessionTemplate.
-		p516 sqlSessionFactory를 쓰면 sqlSessionTemplate는 필요가없다.,-->
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactory" /> 
 	</bean>  
 
 	<!-- 5. Mapper Setting -->
-
-	<!-- MapperScannerConfigurer객체는 value로 들어온 경로의 있는 인터페이스를 사용하년 객체를 자동으로 생성 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.mapper" />
 	</bean>
 	
-	<!-- 아래 설정을 하면 Mapper Interface를 활용하는 객체를 스프링이 생성해줌. 경로도 자동으로 인식 
-	<bean id="ItemMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="com.mapper.ItemMapper"></property>
-		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
-	</bean> 
-	<bean id="UserMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="com.mapper.UserMapper"></property>
-		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
-	</bean> 
-	
-	<bean id="ItemMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="com.mapper.ItemMapper"></property>
-		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"></property>
-	</bean> 
-	<bean id="UserMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="com.mapper.UserMapper"></property>
-		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"></property>
-	</bean> -->
-	<!-- MapperFactoryBean이 sqlSessionFactory를 사용하던 것을 sqlSessionTemplate을 사용하도록 바꿨다. -->
-
 </beans>
 
 

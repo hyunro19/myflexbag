@@ -1,13 +1,12 @@
 package com.user;
 
 import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import com.frame.Dao;
 import com.mapper.UserMapper;
 import com.vo.UserVO;
+
 @Repository("udao")
 public class UserDao implements Dao<String, UserVO> {
 

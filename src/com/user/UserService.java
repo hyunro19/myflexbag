@@ -1,14 +1,12 @@
 package com.user;
 
 import java.util.ArrayList;
-
 import javax.annotation.Resource;
-
 import org.springframework.transaction.annotation.Transactional;
-
 import com.frame.Dao;
 import com.frame.Service;
 import com.vo.UserVO;
+
 @org.springframework.stereotype.Service("uservice")
 public class UserService implements Service<String, UserVO> {
 
@@ -23,13 +21,11 @@ public class UserService implements Service<String, UserVO> {
 	@Override
 	public void remove(String k) throws Exception {
 		dao.delete(k);
-		
 	}
 
 	@Override
 	public void modify(UserVO v) throws Exception {
 		dao.update(v);
-		
 	}
 
 	@Override
