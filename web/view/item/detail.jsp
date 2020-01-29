@@ -63,12 +63,11 @@
 					You also have the option of choosing the number of syllables of the words or the word length of the randomized words. There are also options to further refine by choosing "less than" or "greater than" options for both syllables and word length. Again, if you leave the space blank, the complete list of randomized words will be used.
 
 								<br><br>
-								<img src="${ditem.img1 }" width="80%"> <br><br>
-								<img src="http://img.29cm.co.kr/next-product/2019/05/23/5aaea1ff87ff492783933c9972f8a50e_20190523100544.jpg" style="width:80%;"> <br><br>
-								<img src="http://img.29cm.co.kr/next-product/2019/05/23/bfb86173b7de4e5cb2e7ff213e59c539_20190523102612.jpg" style="width:80%;"> <br><br>
-								<img src="http://img.29cm.co.kr/next-product/2019/05/23/e1368362c52f4962b6583dfb553e3af9_20190523102628.jpg" style="width:80%;"> <br><br>
-								<img src="http://img.29cm.co.kr/next-product/2019/05/23/462055a5f9f3498a9a2065bba7831b3b_20190523100705.jpg" style="width:80%;"> <br><br>
-								
+								<img src="${ditem.img1 }" alt="" width="80%"> <br><br>
+								<img src="${ditem.img2 }" alt="" width="80%"> <br><br>
+								<img src="${ditem.img3 }" alt="" width="80%"> <br><br>
+								<img src="${ditem.img4 }" alt="" width="80%"> <br><br>
+								<img src="${ditem.img5 }" alt="" width="80%"> <br><br>
 																		
 							</p>
 						</div>

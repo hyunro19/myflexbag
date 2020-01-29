@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.frame.Service;
+import com.vo.ItemVO;
 import com.vo.UserVO;
 
 @Controller
@@ -26,9 +27,34 @@ public class MainController {
 	@Resource(name="uservice")
 	Service<String, UserVO> service;
 	
+	@Resource(name="iservice")
+	Service<String, ItemVO> iservice;
+	
 	@RequestMapping("/main.mc")
 	public ModelAndView main() {
+		ItemVO bestVO = new ItemVO();
+		ItemVO latestVO = new ItemVO();
+		
+		ArrayList<ItemVO> bestList = null;
+		ArrayList<ItemVO> latestList = null;
+		
+		bestVO.setPage(1);
+		bestVO.setPerPageNum(3);
+		bestVO.setSortcon("popularity");
+		latestVO.setPage(1);
+		latestVO.setPerPageNum(3);
+		latestVO.setSortcon("pdate");
+
+		try {
+			bestList = iservice.getall(bestVO);
+			latestList = iservice.getall(latestVO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("best", bestList);
+		mv.addObject("latest", latestList);
 		mv.setViewName("main");
 		return mv;
 	}
@@ -66,7 +92,7 @@ public class MainController {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			
-			out.println("<script>alert('비밀번호가 틀렸습니다.'); location.href='login.mc'</script>");
+			out.println("<script>alert('鍮꾨�踰덊샇媛� ���졇�뒿�땲�떎.'); location.href='login.mc'</script>");
 			out.flush();
 			}
 		} catch(Exception e) {
@@ -75,7 +101,7 @@ public class MainController {
 			PrintWriter out;
 		try {
 			out = response.getWriter();
-			out.println("<script>alert('존재하지 않는 아이디입니다.'); location.href='login.mc'</script>");
+			out.println("<script>alert('議댁옱�븯吏� �븡�뒗 �븘�씠�뵒�엯�땲�떎.'); location.href='login.mc'</script>");
 			out.flush();
 		} catch (IOException e1) {
 			//e1.printStackTrace();
