@@ -7,12 +7,12 @@
 	
 		<label for="ID">ID</label>
 		<div class=div_text>
-		<input type="text" name="userid" id="userId" placeholder="ID" style="margin-bottom:0.5em;"><br>
+		<input type="text" name="userid" id="userId" placeholder="ID" value="sample" style="margin-bottom:0.5em;"><br>
 		</div>
 		
 		<label for="PASSWORD">PASSWORD</label>
 		<div class=div_text>
-		<input type="password" name="pwd" placeholder="비밀번호">
+		<input type="password" name="pwd" placeholder="비밀번호" value="sample" >
 		</div>
 		
 		<div class=div_text>

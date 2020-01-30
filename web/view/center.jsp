@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<script>
+	window.onload = function(){
+		$('#popup').click();
+	}
+</script>
 <div id = "mainimg" >
 <img src = "view/img/myflexbag.jpg" >
 </div>
@@ -63,5 +68,35 @@
 
 </div>
 
+<!-- The Modal -->
+    
+<div class="col-md-6 col-lg-4">
+	<div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal1">
+		<span id="popup"></span>
+	</div>
+</div>
 
+  <!-- Portfolio Modal 1 -->
+  <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-labelledby="portfolioModal1Label" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-body text-center">
+          <div class="modal-container">
+            <div class="row justify-content-center">
+              <div>
+                <!-- Portfolio Modal - Text -->
+                <span class="mb-5">
+                  	테스트를 위한 샘플 계정이 제공됩니다.<br><br>
+                	ID : sample<br>
+                	PW : sample</span><br><br>
+                <button class="btn btn-primary" href="#" data-dismiss="modal">
+                  CLOSE
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 

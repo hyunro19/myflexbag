@@ -3082,8 +3082,8 @@ fieldset[disabled] .btn-default.active {
 }
 .btn-primary {
   color: #fff;
-  background-color: #337ab7;
-  border-color: #2e6da4;
+  background-color: #b3c6d5;
+  border-color: #b3c6d5;
 }
 .btn-primary:hover,
 .btn-primary:focus,
@@ -3092,8 +3092,8 @@ fieldset[disabled] .btn-default.active {
 .btn-primary.active,
 .open > .dropdown-toggle.btn-primary {
   color: #fff;
-  background-color: #286090;
-  border-color: #204d74;
+  background-color: #b3c6d5;
+  border-color: #b3c6d5;
 }
 .btn-primary:active,
 .btn-primary.active,
@@ -5751,8 +5751,8 @@ button.close {
 }
 .modal-dialog {
   position: relative;
-  width: auto;
-  margin: 10px;
+  width: 400px;
+  margin: 30px;
 }
 .modal-content {
   position: relative;
@@ -5795,7 +5795,7 @@ button.close {
 }
 .modal-body {
   position: relative;
-  padding: 15px;
+  padding: 40px 15px 30px 15px;
 }
 .modal-footer {
   padding: 15px;
@@ -5821,7 +5821,7 @@ button.close {
 }
 @media (min-width: 768px) {
   .modal-dialog {
-    width: 600px;
+    width: 400px;
     margin: 30px auto;
   }
   .modal-content {
@@ -6579,5 +6579,13 @@ button.close {
   .hidden-print {
     display: none !important;
   }
+}
+
+.modal-container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  width: inherit;
 }
 /*# sourceMappingURL=bootstrap.css.map */
