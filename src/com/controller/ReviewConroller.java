@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.frame.Service;
+import com.vo.PageVO;
 import com.vo.ReviewVO;
 
 @Controller
@@ -18,11 +19,27 @@ public class ReviewConroller {
 
 	@Resource(name = "rservice")
 	Service<String, ReviewVO> service;
+	
+	@Resource(name = "pservice")
+	Service<String, PageVO> pservice;
 
 	@RequestMapping("/review.mc")
-	public ModelAndView qnaboard(ModelAndView mv, ArrayList<ReviewVO> list, ReviewVO vo) throws Exception {
-		list = service.getall(vo);
+	public ModelAndView qnaboard(ModelAndView mv, ReviewVO vo, PageVO pageprev) throws Exception {
+		ArrayList<ReviewVO> list = null;
+		ArrayList<PageVO> plist = null;
 		
+		mv.addObject("pageprev", pageprev); 
+		pageprev.setTablename("Lreview");
+
+		list = service.getall(vo);		
+		plist = pservice.getall(pageprev);
+		
+		PageVO pagenext = plist.get(0);
+		pagenext.setPage(pageprev.getPage());
+		pagenext.calcData(pagenext.getPage(), pagenext.getPerPageNum());
+		
+		mv.addObject("pagenext", pagenext);	
+		mv.addObject("base", "review.mc");
 		mv.addObject("rlist", list);
 		mv.addObject("center", "review/review_index");
 		mv.setViewName("main");
@@ -48,8 +65,11 @@ public class ReviewConroller {
 	}
 	
 	@RequestMapping(value = "/review_detail.mc", method = RequestMethod.GET)
-	public ModelAndView reviewdetailview(@RequestParam("rvno") String rvno, ModelAndView mv) throws Exception {
+	public ModelAndView reviewdetailview(@RequestParam("rvno") String rvno, ModelAndView mv, PageVO pagevo) throws Exception {
 		ReviewVO vo = service.get(rvno);
+		
+		mv.addObject("pagevo",pagevo);
+		mv.addObject("pagelink",pagevo.getListLink());
 		mv.addObject("rvdetail", vo);
 		mv.addObject("center", "review/review_detail");
 		mv.setViewName("main");

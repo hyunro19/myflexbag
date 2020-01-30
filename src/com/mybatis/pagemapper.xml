@@ -23,7 +23,10 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectall" resultType="page">
-		SELECT count(*) totalcount FROM Lproduct WHERE 1 = 1
+		SELECT count(*) totalcount FROM ${tablename} WHERE 1 = 1
+		<if test="userid != null"> AND  userid = #{userid}	</if>
+		<if test="userid == ''"> </if>
+		
 		<if test="cateid != null"> AND  cateid = #{cateid}	</if>
 		<if test="cateid == ''"> </if>
 		

@@ -18,8 +18,10 @@
 				<div style="text-align:center;"><a href="review_write.mc?pid=${checkView.pid}"><button>리뷰 작성</button></a></div><br><br><br>
 				</c:forEach>
 
+			<a href="ordercheck.mc${pagelink }&page=${pagevo.page }"><button class="btn">목록</button></a>
 			</div>
 		</section>
+		
 	</div>
 
 </section>

@@ -1,7 +1,6 @@
 package com.controller;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -18,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.vo.CartVO;
 import com.vo.OrderDetailVO;
 import com.vo.OrderVO;
+import com.vo.PageVO;
 import com.vo.UserVO;
 import com.frame.Service;
 import com.frame.ServiceO;
@@ -36,6 +36,9 @@ public class CartController {
 	
 	@Resource(name="odservice")
 	Service<String, OrderDetailVO> odservice;
+	
+	@Resource(name="pservice")
+	Service<String, PageVO> pservice;
 	
 	@ResponseBody
 	@RequestMapping(value = "/cadd.mc", method = RequestMethod.POST)
@@ -60,7 +63,9 @@ public class CartController {
 			}
 			if(flag || clist.size()==0 ) service.register(vo);
 			result = 1;
-		}		
+		} else if (session.getAttribute("loginid") == null ) {
+			result = 2;
+		}
 		return result;
 	}
 	
@@ -184,15 +189,26 @@ public class CartController {
 	}
 	
 	   @RequestMapping("/ordercheck.mc")
-	   public ModelAndView orderCheck(HttpSession session, ModelAndView mv, OrderVO od) {
-	      ArrayList<OrderVO> orderList = null;	      
+	   public ModelAndView orderCheck(HttpSession session, ModelAndView mv, OrderVO od, PageVO pageprev) {
+	      ArrayList<OrderVO> orderList = null;
+	      ArrayList<PageVO> plist = null;
+	      
 	      String userid = (String)session.getAttribute("loginid");
 	      try {
-	         od.setUserid(userid);
-	         orderList = oservice.getall(od);
-	         mv.addObject("odlist", orderList);
-	         mv.addObject("center", "cart/ordercheck");
-	         mv.setViewName("main");
+	    	mv.addObject("pageprev",pageprev); // �씠�쟾 �럹�씠吏� �젙蹂� pagevo
+			pageprev.setTablename("Lorder");
+	        od.setUserid(userid);
+	        orderList = oservice.getall(od);
+	        plist = pservice.getall(pageprev);
+	        
+			PageVO pagenext = plist.get(0); // �깉 �럹�씠吏� �젙蹂� pagevo
+			pagenext.setPage(pageprev.getPage());
+			pagenext.calcData(pagenext.getPage(), pagenext.getPerPageNum());
+
+			mv.addObject("pagenext", pagenext);	
+	        mv.addObject("odlist", orderList);
+	        mv.addObject("center", "cart/ordercheck");
+	        mv.setViewName("main");
 	      } catch (Exception e) {
 	         e.printStackTrace();
 	      }
@@ -200,10 +216,13 @@ public class CartController {
 	   }
 	   
 	@RequestMapping("/ordercheckview.mc")
-	public ModelAndView orderCheckView(HttpSession session, ModelAndView mv, OrderDetailVO odt) {
+	public ModelAndView orderCheckView(HttpSession session, ModelAndView mv, OrderDetailVO odt, PageVO pagevo) {
 	   ArrayList<OrderDetailVO> ordercheckview = null;
 	   try {
-	      ordercheckview = odservice.getall(odt);
+		   ordercheckview = odservice.getall(odt);
+		   mv.addObject("pagevo",pagevo);
+		   mv.addObject("pagelink",pagevo.getListLink());
+
 	      mv.addObject("orderCheckView", ordercheckview);
 	      mv.addObject("center", "cart/ordercheckview");
 	      mv.setViewName("main");

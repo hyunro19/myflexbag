@@ -92,7 +92,6 @@ public class ItemController {
 	
 	@RequestMapping("/idetail.mc")
 	public ModelAndView detail(ModelAndView mv, ItemVO item, PageVO pagevo, ReviewVO rv) {
-//		ItemVO item = null;
 		ArrayList<ReviewVO> reviewList;
 		try {
 			item = service.get(""+item.getPid());
@@ -111,20 +110,23 @@ public class ItemController {
 	}
 	
 	@RequestMapping("/ilist.mc")
-	public ModelAndView list(ModelAndView mv, ItemVO vo, PageVO pagevo) { //String cateid,
+	public ModelAndView list(ModelAndView mv, ItemVO vo, PageVO pageprev) { //String cateid,
 
 		ArrayList<ItemVO> list = null;
 		ArrayList<PageVO> plist = null;
 		try {
-			mv.addObject("pageprev",pagevo); // 이전 페이지 정보 pagevo
-			mv.addObject("pagelink",pagevo.getListLink()); // 이전 페이지 url정보
+			mv.addObject("pageprev",pageprev); // �씠�쟾 �럹�씠吏� �젙蹂� pagevo
+			pageprev.setTablename("Lproduct");
 
 			list = service.getall(vo);
-			plist = pservice.getall(pagevo);
-			pagevo = plist.get(0); // 새 페이지 정보 pagevo
-			pagevo.calcData(vo.getPage(), vo.getPerPageNum());
+			plist = pservice.getall(pageprev);
+			
+			PageVO pagenext = plist.get(0); // �깉 �럹�씠吏� �젙蹂� pagevo
+			pagenext.setPage(pageprev.getPage());
+			pagenext.calcData(pagenext.getPage(), pagenext.getPerPageNum());
 
-			mv.addObject("pagevo", pagevo);	
+			mv.addObject("pagenext", pagenext);	
+			mv.addObject("base", "ilist.mc");
 			mv.addObject("ilist", list);
 			mv.addObject("center", "item/list");
 			mv.setViewName("main");

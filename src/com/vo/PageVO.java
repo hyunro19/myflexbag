@@ -1,7 +1,5 @@
 package com.vo;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 public class PageVO {
@@ -10,8 +8,10 @@ public class PageVO {
 	private int endPage;
 	private boolean prev;
 	private boolean next;
+	private String tablename;
+	private String userid;
 	
-	private int displayPageNum = 10; //화면 하단 1~10, 11~20 같이 10개씩
+	private int displayPageNum = 10; // pagenav에 보여줄 페이지 수
 	
 	private int page=1;
 	private int perPageNum=30;
@@ -77,10 +77,18 @@ public class PageVO {
 	public void setPerPageNum(int perPageNum) {
 		this.perPageNum = perPageNum;
 	}
+	public String getTablename() {
+		return tablename;
+	}
+	public void setTablename(String tablename) {
+		this.tablename = tablename;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "PageVO [totalCount=" + totalCount + ", startPage=" + startPage + ", endPage=" + endPage + ", prev="
-				+ prev + ", next=" + next + ", displayPageNum=" + displayPageNum + "]";
+				+ prev + ", next=" + next + ", displayPageNum=" + displayPageNum + ", tablename=" + tablename + "]";
 	}
 	
 	private String cateid;
@@ -124,6 +132,12 @@ public class PageVO {
 	public void setMatid(String matid) {
 		this.matid = matid;
 	}
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
 	public String getSortcon() {
 		return sortcon;
 	}
@@ -151,15 +165,16 @@ public class PageVO {
 	
 	public String getListLink() {
 		UriComponentsBuilder builder= UriComponentsBuilder
-				.fromPath("")
-//				.queryParam("page", this.getPage())
-				.queryParam("perPageNum", this.getPerPageNum());
-				if (this.getCateid() != null && this.getCateid() !="") builder = builder.queryParam("cateid", this.getCateid());
-				if (this.getBrandid() != null && this.getBrandid() !="") builder = builder.queryParam("brandid", this.getBrandid());
-				if (this.getMatid() != null && this.getMatid() !="") builder = builder.queryParam("matid", this.getMatid());
-				if (this.getSortcon() != null && this.getSortcon() !="") builder = builder.queryParam("sortcon", this.getSortcon());
-//				.queryParam("page", this.getPage())
-		return builder.build().toString();
+			.fromPath("")
+//			.queryParam("page", this.getPage())
+			.queryParam("perPageNum", this.getPerPageNum());
+			if (this.getCateid() != null && this.getCateid() !="") builder = builder.queryParam("cateid", this.getCateid());
+			if (this.getBrandid() != null && this.getBrandid() !="") builder = builder.queryParam("brandid", this.getBrandid());
+			if (this.getMatid() != null && this.getMatid() !="") builder = builder.queryParam("matid", this.getMatid());
+			if (this.getSortcon() != null && this.getSortcon() !="") builder = builder.queryParam("sortcon", this.getSortcon());
+//			.queryParam("page", this.getPage())
+			
+			return builder.build().toString(); 
 	}
 	
 }

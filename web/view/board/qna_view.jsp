@@ -36,18 +36,20 @@
 		</table>
 		<br><br>
 
-		<button class="btn" type="button">
-			<a href="qna_index.mc">목록</a>
-		</button>
+			<a href="qna_index.mc${pagelink }&page=${pagevo.page }"><button class="btn">목록</button></a>
 
 		<c:choose>
 			<c:when test="${loginid == article.userid }">
+				<a href="qna_del.mc?bno=${article.bno }">
 					<button class="btn" type="button">
-						<a href="qna_del.mc?bno=${article.bno }">삭제하기</a>
+						삭제하기
 					</button>
-			<button class="btn" type="button">
-						<a href="qna_update.mc?bno=${article.bno }">수정하기</a>
+				</a>
+				<a href="qna_update.mc?bno=${article.bno }">
+					<button class="btn" type="button">
+						수정하기
 					</button>
+				</a>
 			</c:when>
 		</c:choose>
 	</div>

@@ -22,7 +22,7 @@
 						<td>${value.count }</td>
 						<td>${item.pname}</td>
 						<td>${item.userid}</td>
-						<td><a href="review_detail.mc?rvno=${item.rvno}">${item.rvtitle}</a></td>
+						<td><a href="review_detail.mc?rvno=${item.rvno}&page=${pagenext.page}">${item.rvtitle}</a></td>
 						<td>${item.rvdate}</td>
 					</tr>
 				</c:forEach>
@@ -30,6 +30,9 @@
 
 		</table>
 	
+		<!-- paging navigation -->
+		<jsp:include page="/view/pagenav.jsp" />
+		
 	</div>
 
 </body>

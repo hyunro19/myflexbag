@@ -1,40 +1,49 @@
 package com.controller;
 
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.frame.Service;
 import com.vo.BoardVO;
-import com.vo.UserVO;
+import com.vo.PageVO;
 
 @Controller
 public class BoardController {
 
 	@Resource(name = "bservice")
 	Service<String, BoardVO> service;
+	
+	@Resource(name = "pservice")
+	Service<String, PageVO> pservice;
 
 	@RequestMapping("/qna_index.mc")
-	public ModelAndView qnaboard(ModelAndView mv,ArrayList<BoardVO> list, BoardVO vo) throws Exception {
-			list = service.getall(vo);
-			mv.addObject("blist", list);
-			mv.addObject("center", "board/qna_index");
-			mv.setViewName("main");
+	public ModelAndView qnaboard(ModelAndView mv,BoardVO vo, PageVO pageprev) throws Exception {
+		ArrayList<BoardVO> list = null;
+		ArrayList<PageVO> plist = null;
+		
+		mv.addObject("pageprev", pageprev);
+		pageprev.setTablename("Lboard");
+		
+		list = service.getall(vo);		
+		plist = pservice.getall(pageprev);
+		
+		PageVO pagenext = plist.get(0);
+		pagenext.setPage(pageprev.getPage());
+		pagenext.calcData(pagenext.getPage(), pagenext.getPerPageNum());
+	
+		mv.addObject("pagenext", pagenext);	 
+		mv.addObject("base", "qna_index.mc");
+		mv.addObject("blist", list);
+		mv.addObject("center", "board/qna_index");
+		mv.setViewName("main");
+		
 		return mv;
 	}
 
@@ -59,8 +68,11 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/qna_view.mc", method = RequestMethod.GET)
-	public ModelAndView qnadetailview(@RequestParam("bno") int bno, ModelAndView mv) throws Exception {
+	public ModelAndView qnadetailview(@RequestParam("bno") int bno, ModelAndView mv, PageVO pagevo) throws Exception {
 		BoardVO vo = service.get( Integer.toString(bno) );
+		
+		mv.addObject("pagevo",pagevo);
+		mv.addObject("pagelink",pagevo.getListLink());
 		mv.addObject("article", vo);
 		mv.addObject("center", "board/qna_view");
 		mv.setViewName("main");

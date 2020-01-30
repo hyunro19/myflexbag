@@ -1,0 +1,114 @@
+MySQL Sequence 예시
+
+CREATE TABLE employees (
+    emp_no INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50)
+);
+
+INSERT INTO employees(first_name,last_name)
+VALUES('John','Doe'),
+      ('Mary','Jane');
+
+SELECT * FROM employees;
+
+오라클의 sysdate는 MySQL의 sysdate( )
+DOUBLE 은 전부 다 INT로 바꿔주자
+
+------------------------------------------
+DROP TABLE users;
+CREATE TABLE users (
+ userid VARCHAR(20) NOT NULL PRIMARY KEY,
+ pwd VARCHAR(20) NULL,
+ uno DOUBLE NULL,
+ uname VARCHAR(20) NULL,
+ gender VARCHAR(5) NULL,
+ phone DOUBLE NULL,
+ email VARCHAR(50) NULL,
+ address VARCHAR(100) NULL,
+ birthdate DATETIME NULL
+);
+
+
+DROP TABLE Lorder;
+CREATE TABLE Lorder (
+ orderno INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ userid VARCHAR(20) NOT NULL,
+ payid VARCHAR(20) NOT NULL,
+ deliid VARCHAR(20) NOT NULL,
+ odate DATETIME NULL,
+ receiver VARCHAR(20) NULL,
+orderphone VARCHAR(20) NULL,
+ address VARCHAR(100) NULL,
+ quantitysum DOUBLE NULL,
+ pricesum DOUBLE NULL,
+ gender VARCHAR(5) NULL
+);
+
+DROP TABLE Ldetail;
+CREATE TABLE Ldetail (
+ orderdetailno INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ orderno INT NOT NULL,
+ pid DOUBLE NOT NULL,
+ unitprice DOUBLE NULL,
+ quantity DOUBLE NULL,
+ mprice DOUBLE NULL
+);
+
+DROP TABLE Lproduct;
+CREATE TABLE Lproduct (
+ pid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ cateid VARCHAR(20) NOT NULL,
+ sizeid VARCHAR(20) NOT NULL,
+ colorid VARCHAR(20) NOT NULL,
+ brandid VARCHAR(20) NOT NULL,
+ matid VARCHAR(20) NOT NULL,
+ pname VARCHAR(100) NULL,
+ price INT NULL,
+ pstock INT NULL,
+ pdate DATETIME NULL,
+ img1 VARCHAR(500) NULL,
+ img2 VARCHAR(500) NULL,
+ img3 VARCHAR(500) NULL,
+ img4 VARCHAR(500) NULL,
+ img5 VARCHAR(500) NULL
+);
+
+DROP TABLE Lcart;
+CREATE TABLE Lcart (
+ cartno INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ userid VARCHAR(20) NOT NULL,
+ pid DOUBLE NOT NULL,
+ pname VARCHAR(20) NULL,
+ pnum DOUBLE NULL,
+ price DOUBLE NULL,
+ cdate DATETIME NULL,
+ img VARCHAR(20) NULL
+);
+
+DROP TABLE Lboard;
+CREATE TABLE Lboard (
+ bno INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ userid VARCHAR(20) NOT NULL,
+ bkind VARCHAR(20) NOT NULL,
+ bdate DATETIME NULL,
+ btitle VARCHAR(100) NULL,
+ bcon VARCHAR(999) NULL
+);
+
+DROP TABLE Lreview;
+CREATE TABLE Lreview (
+ rvno INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ pid INT NOT NULL,
+ pname VARCHAR(50) NOT NULL,
+ userid VARCHAR(20) NOT NULL,
+ RVDATE DATETIME NULL,
+ RVTITLE VARCHAR(200) NULL,
+ RVCON VARCHAR(500) NULL
+); 
+
+DROP TABLE Lcode;
+CREATE TABLE Lcode (
+ code VARCHAR(20) NOT NULL PRIMARY KEY,
+ cont VARCHAR(30) NULL
+);

@@ -42,20 +42,26 @@
 									</c:otherwise>
 								</c:choose>
 							</td>
-						<td><a href="qna_view.mc?bno=${article.bno}">${article.btitle}</a></td>
+						<td><a href="qna_view.mc?bno=${article.bno}&page=${pagenext.page}">${article.btitle}</a></td>
 						<td>${article.bdate}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 
 		</table>
+		
+		<!-- paging navigation -->
+		<jsp:include page="/view/pagenav.jsp" />
+		
 		<c:choose>
 			<c:when test="${loginid == null }">
 			</c:when>
 			<c:otherwise>
-				<button input type="button">
-					<a href="qna_write.mc">문의하기</a>
-				</button>
+				<a href="qna_write.mc">
+					<button type="button">
+						문의하기
+					</button>
+				</a>
 			</c:otherwise>
 		</c:choose>
 	</div>

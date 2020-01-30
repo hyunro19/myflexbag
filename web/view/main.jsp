@@ -37,8 +37,13 @@
 				type : "post",
 				data : data,
 				success : function(result){
-				    alert("상품이 카트에 담겼습니다.");
-				    $(".numBox").val("1");
+					if( result == 1 ) {
+						alert("상품이 카트에 담겼습니다.");
+					    $(".numBox").val("1");	
+					} else if ( result == 2) {
+						alert("로그인 후에 카트에 담을 수 있습니다.");
+					}
+				    
 				   },
 				error : function(){
 				alert("상품을 카트에 담는데 실패하였습니다.");

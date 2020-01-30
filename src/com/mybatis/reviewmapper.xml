@@ -6,14 +6,20 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 <mapper namespace="com.mapper.ReviewMapper">
 
 	<select id="selectall" resultType="review" parameterType="review">
-		SELECT * FROM Lreview WHERE 1=1
-		<if test="pid != 0"> AND  pid = #{pid}	</if>
-		<if test="userid != null"> AND USERID=#{userid}	</if>
-		ORDER BY rvdate DESC
+		SELECT * FROM (
+			SELECT rownum rnum, rvno, pid, pname, userid, rvdate, rvtitle, rvcon FROM 
+				( 
+				SELECT * FROM Lreview WHERE 1=1
+				<if test="pid != 0"> AND  pid = #{pid}	</if>
+				<if test="userid != null"> AND USERID=#{userid}	</if>
+				ORDER BY rvdate DESC
+				) 
+			) <if test="pageStart != null"> WHERE rnum between #{pageStart} and #{pageEnd} </if>
+			
 	</select>
 
 	<insert id="insert" parameterType="review">
-	INSERT INTO LREVIEW (rvno,pid, pname,userid,	rvdate,	rvtitle,	rvcon)
+	INSERT INTO LREVIEW (rvno,pid, pname,userid, rvdate, rvtitle, rvcon)
 	SELECT seq_review.nextval, #{pid}, pname, #{userid}, sysdate, #{rvtitle},#{rvcon} FROM Lproduct WHERE pid = #{pid}
 	</insert>
 	
@@ -21,7 +27,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT * FROM Lreview WHERE rvno=#{rvno}	
 	</select>
 	
-		<delete id="delete" parameterType="String">
+	<delete id="delete" parameterType="String">
 		DELETE FROM Lreview WHERE rvno=#{rvno}
 	</delete>
 	

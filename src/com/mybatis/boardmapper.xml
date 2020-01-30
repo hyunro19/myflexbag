@@ -22,10 +22,15 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="selectall" resultType="board">
-		SELECT * FROM LBOARD WHERE 1=1
-		<if test="bkind != null"> AND  bkind = #{bkind}	</if>
-		<if test="userid!=null"> AND userid = #{userid} </if>
-		ORDER BY bdate DESC
+		SELECT * FROM (
+			SELECT rownum rnum, bno, userid, bkind, bdate, btitle, bcon FROM 
+				( 
+					SELECT * FROM Lboard WHERE 1=1
+					<if test="bkind != null"> AND  bkind = #{bkind}	</if>
+					<if test="userid!=null"> AND userid = #{userid} </if>
+					ORDER BY bdate DESC
+				) 
+			) <if test="pageStart != null"> WHERE rnum between #{pageStart} and #{pageEnd} </if>
 	</select>
 
 </mapper>

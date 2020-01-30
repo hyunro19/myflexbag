@@ -8,7 +8,8 @@
 		<tr><td><div style="text-align:center;">내 용</div><td><td>  ${rvdetail.rvcon} <td></tr>
 	</table> 
 <br><br>
-<a href="review.mc"><button type="button">목록</button></a>
+
+<a href="review.mc${pagelink }&page=${pagevo.page }"><button class="btn">목록</button></a>
 
 <c:choose>
 	<c:when test="${loginid == rvdetail.userid }">
@@ -19,5 +20,7 @@
 		<a href="review_update.mc?rvno=${rvdetail.rvno }"><button class="btn" type="button">수정하기</button></a>
 	</c:when>
 </c:choose>
+
+
 
 </div>

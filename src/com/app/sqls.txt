@@ -1,4 +1,25 @@
-INSERT INTO Lproduct VALUES(Lproduct_seq.nextval, 'backpack', 'medium', 'red', 'givency', 'knit', 'givency_257', '100000', '1', sysdate, 'https://djp5oonlusoz4.cloudfront.net/goods/201908/208/2085949-1-ls.jpg', 'https://djp5oonlusoz4.cloudfront.net/goods/201908/208/2085949-2-ls.jpg', 'https://djp5oonlusoz4.cloudfront.net/goods/201908/208/2085949-3-ls.jpg', 'https://djp5oonlusoz4.cloudfront.net/goods/201908/208/2085949-4-ls.jpg', 'https://djp5oonlusoz4.cloudfront.net/goods/201908/208/2085949-5-ls.jpg'); 
+Lproduct_seq.nextval 지우기
+sysdate -> sysdate()
+Lproduct_seq.nextval -> null (// sequence가 들어갔던 자리에는 null을 써주면 됨)
+
+INSERT INTO Lproduct VALUES( 
+null, 
+'backpack', 
+'medium', 
+'red', 
+'givency', 
+'knit', 
+'givency_257', 
+'100000', 
+'1', 
+sysdate(), 
+'https://djp5oonlusoz4.cloudfront.net/goods/201908/208/2085949-1-ls.jpg', 
+'https://djp5oonlusoz4.cloudfront.net/goods/201908/208/2085949-2-ls.jpg', 
+'https://djp5oonlusoz4.cloudfront.net/goods/201908/208/2085949-3-ls.jpg', 
+'https://djp5oonlusoz4.cloudfront.net/goods/201908/208/2085949-4-ls.jpg', 
+'https://djp5oonlusoz4.cloudfront.net/goods/201908/208/2085949-5-ls.jpg'); 
+
+----------------------------------------------------------------------------
 INSERT INTO Lproduct VALUES(Lproduct_seq.nextval, 'messenger', 'free', 'pink', 'fendi', 'knit', 'fendi_532', '590000', '17', sysdate, 'https://i.balaan.io/goods/prod/201912/298/2988483-0.jpg', 'https://i.balaan.io/goods/prod/201912/298/2988483-1.jpg', 'https://i.balaan.io/goods/prod/201912/298/2988483-2.jpg', 'https://i.balaan.io/goods/prod/201912/298/2988483-3.jpg', 'https://i.balaan.io/goods/prod/201912/298/2988483-4.jpg'); 
 INSERT INTO Lproduct VALUES(Lproduct_seq.nextval, 'tote', 'large', 'orange', 'fendi', 'calfskin', 'fendi_197', '650000', '0', sysdate, 'https://i.balaan.io/goods/prod/201912/298/2988483-0.jpg', 'https://i.balaan.io/goods/prod/201912/298/2988483-1.jpg', 'https://i.balaan.io/goods/prod/201912/298/2988483-2.jpg', 'https://i.balaan.io/goods/prod/201912/298/2988483-3.jpg', 'https://i.balaan.io/goods/prod/201912/298/2988483-4.jpg'); 
 INSERT INTO Lproduct VALUES(Lproduct_seq.nextval, 'wallet', 'large', 'etc', 'prada', 'lambskin', 'prada_329', '60000', '14', sysdate, 'https://djp5oonlusoz4.cloudfront.net/goods/201908/208/2085210-1-ls.jpg', 'https://djp5oonlusoz4.cloudfront.net/goods/201908/208/2085210-2-ls.jpg', 'https://djp5oonlusoz4.cloudfront.net/goods/201908/208/2085210-3-ls.jpg', 'https://djp5oonlusoz4.cloudfront.net/goods/201908/208/2085210-4-ls.jpg', 'https://djp5oonlusoz4.cloudfront.net/goods/201908/208/2085210-5-ls.jpg'); 

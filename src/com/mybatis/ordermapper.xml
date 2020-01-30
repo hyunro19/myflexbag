@@ -4,7 +4,12 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mapper.OrderMapper">
 	<select id = "selectall" resultType="order">
-		SELECT * FROM Lorder WHERE userid=#{userid} ORDER BY ODATE DESC	
+		SELECT * FROM (
+			SELECT rownum rnum, orderno, userid, payid, deliid, odate, receiver, orderphon, address, quantitysum, pricesum, gender FROM 
+			( 
+			SELECT * FROM Lorder WHERE userid=#{userid} ORDER BY ODATE DESC
+			) 
+		) WHERE rnum between #{pageStart} and #{pageEnd}	
 	</select>
 	
 	<insert id="insert" parameterType="order">

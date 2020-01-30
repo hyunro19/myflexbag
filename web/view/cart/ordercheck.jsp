@@ -10,7 +10,7 @@
 				
 				<c:forEach items="${odlist}" var="oditem">
 						<table class="table" style="margin-bottom:0">
-							<tr><td><div style="text-align:center;">주문번호</div><td><td><a href="/myflexbag/ordercheckview.mc?orderno=${oditem.orderno}">${oditem.orderno}</a><td></tr>
+							<tr><td><div style="text-align:center;">주문번호</div><td><td><a href="/myflexbag/ordercheckview.mc?orderno=${oditem.orderno}&page=${pagenext.page}">${oditem.orderno}</a><td></tr>
 							<tr><td><div style="text-align:center;">주문날짜</div><td><td>${oditem.odate}<td></tr>
 							<tr><td><div style="text-align:center;">받는사람</div><td><td>${oditem.receiver}<td></tr>
 							<tr><td><div style="text-align:center;">받는번호</div><td><td>${oditem.orderphon}<td></tr>
@@ -22,6 +22,10 @@
 				</c:forEach>
 					
 			</div>
+			
+			<!-- paging navigation -->
+			<jsp:include page="/view/pagenav.jsp" />
+			
 		</section>
 	</div>
 </section>
