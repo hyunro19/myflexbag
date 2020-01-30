@@ -16,15 +16,8 @@ public class Main {
 //		}
 
 		// 각 상품 상세 페이지에서 이미지 5개씩 가져오기
-//		String url;
-//		for (int i=1; i<=20; i++) {
-//			url = "http://www.balaan.co.kr/m2/goods/list.php?searchType=&category=010004&brandno=&keyword=&f_category=010004&f_price[]=&f_price[]=&f_delivery=&sort=&from=&page="
-//					+i;
-//			List<String> list = CrawlingList.crawling(url);
-//			TxtWriter.write("list", list);
-//		}
-		TxtReader.read("list");
-//		CrawlingItem.crawling("http://balaan.co.kr/m2/goods/view.php?searchType=&category=010004&brandno=&keyword=&f_category=010004&f_price[]=&f_price[]=&f_delivery=&sort=&from=&page=1&goodsno=2938376");
+//		TxtReader.read("list");
+
 	}
 
 }

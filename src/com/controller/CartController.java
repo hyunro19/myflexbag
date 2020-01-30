@@ -195,13 +195,13 @@ public class CartController {
 	      
 	      String userid = (String)session.getAttribute("loginid");
 	      try {
-	    	mv.addObject("pageprev",pageprev); // �씠�쟾 �럹�씠吏� �젙蹂� pagevo
+	    	mv.addObject("pageprev",pageprev);
 			pageprev.setTablename("Lorder");
 	        od.setUserid(userid);
 	        orderList = oservice.getall(od);
 	        plist = pservice.getall(pageprev);
 	        
-			PageVO pagenext = plist.get(0); // �깉 �럹�씠吏� �젙蹂� pagevo
+			PageVO pagenext = plist.get(0);
 			pagenext.setPage(pageprev.getPage());
 			pagenext.calcData(pagenext.getPage(), pagenext.getPerPageNum());
 

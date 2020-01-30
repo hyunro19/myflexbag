@@ -33,29 +33,30 @@ public class OrderService implements ServiceO<String, OrderVO> {
 		
 		ArrayList<CartVO> cartList = v.getCartList();
 		
-		//order ìž…ë ¥
+		// Transaction Ã³¸®
+		//order »ðÀÔ
 		odao.insert(v);
 		int seq = v.getOrderno();
 		for(int i=0; i<cartList.size(); i++) {
 			CartVO cv = cartList.get(i);
 			
-			//orderdetail ìž…ë ¥
+			//orderdetail : order ÇÏ³ª¿Í ¸ÅÄªµÇ´Â orderdetail Ã³¸®
 			OrderDetailVO odt = new OrderDetailVO();
 			odt.setOrderno(Integer.toString(seq));
 			odt.setPid(cv.getPid());
 			odt.setUnitprice(cv.getPrice());
 			odt.setQuantity(cv.getPnum());
-			odt.setMprice( cv.getPrice() * cv.getPnum() ); //ì´ê¸ˆì•¡
+			odt.setMprice( cv.getPrice() * cv.getPnum() );
 			oddao.insert(odt);	
 			
-			//itemVO ìž¬ê³  ì—…ë°ì´íŠ¸
+			//itemVO ÁÖ¹®·® ¸¸Å­ Àç°í °¨¼Ò
 			ItemVO iv = idao.select(Integer.toString(cv.getPid()));
 			int tempstock = iv.getPstock();
 			tempstock -= cv.getPnum();
 			iv.setPstock(tempstock);
 			idao.update(iv);
 			
-			//cartVO ì§€ìš°ê¸°
+			//cartVO Ä«Æ® ºñ¿ì±â
 			int cartno = cv.getCartno();
 			cdao.delete(Integer.toString(cartno));
 		}

@@ -59,7 +59,7 @@ public class UserController {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			
-			out.println("<script>alert('회원가입을 환영합니다!'); location.href='main.mc'</script>");
+			out.println("<script>alert('ȸ�������� ȯ���մϴ�!'); location.href='main.mc'</script>");
 			out.flush();
 			
 		} catch (Exception e) {
@@ -78,7 +78,6 @@ public class UserController {
 		return mv;
 	}
 
-	// 주문가져오는 매개변수 추가 필요
 	@RequestMapping(value = "/order_chk.mc")
 	public ModelAndView orderchkview() {
 		ModelAndView mv = new ModelAndView();
@@ -112,7 +111,6 @@ public class UserController {
 		ArrayList<UserVO> list;
 		list = service.getall(vo);
 		UserVO real = list.get(0);
-		
 
 		boolean data = false;
 
@@ -124,9 +122,9 @@ public class UserController {
 		return data;
 	}
 	@RequestMapping("/del.mc")
-	public String del(HttpServletRequest request) throws Exception {
-		HttpSession session = request.getSession();
+	public String del(HttpSession session) throws Exception {
 		String id = (String) session.getAttribute("loginid");
+		if(id.equals("sample")) { return "redirect:main.mc"; };
 		service.remove(id);
 		if (session != null) {
 			session.invalidate();
@@ -147,7 +145,8 @@ public class UserController {
 	}
 	
 	@RequestMapping("/uupdate.mc")
-	public ModelAndView update(ModelAndView mv, String userid) {
+	public ModelAndView update(ModelAndView mv, HttpSession session) {
+		String userid = (String) session.getAttribute("loginid");
 		UserVO user = null;
 		try {
 			user = service.get(userid);
@@ -162,8 +161,12 @@ public class UserController {
 	
 	
 	@RequestMapping("/ulist.mc")
-	public ModelAndView list(ModelAndView mv, UserVO vo) {
-		
+	public ModelAndView list(ModelAndView mv, UserVO vo, HttpSession session) {
+		String id = (String) session.getAttribute("loginid");
+		if(!id.equals("admin")) {
+			mv.setViewName("ilist.mc");
+			return mv;
+		}
 		ArrayList<UserVO> list
 		= null;
 		try {

@@ -21,6 +21,12 @@
 	};
 
 	function form_chk(){
+		var userid = $('#userid').val();
+	    if (userid == 'sample') {
+	    	alert("'sample'계정은 수정할 수 없습니다.")
+	    	return false;
+	    }
+	    
 		var form = document.userInfo;
 
 		if (!form.pwd.value) {
@@ -87,10 +93,13 @@
 	};
 
 function del_Chk(){
-	var flag = true;
     //결제 버튼 누르면 주문완료 페이지로 
 	var userid = $('#userid').val();
     var pwd = $('#pwd').val();
+    if (userid == 'sample') {
+    	alert("'sample'계정은 탈퇴할 수 없습니다.")
+    	return false;
+    }
 
        $.ajax({
           url:"udel.mc",
@@ -101,30 +110,22 @@ function del_Chk(){
           },
           success:function(data){
              if(data){
-            	 console.log("1");
                  var confirm_val = confirm("정말 탈퇴하시겠습니까?");
                  if (confirm_val){
-                	 console.log("2");
                     return true;
                  }
                  else {
-                	 console.log("3");
-                	 flag = false;
+                	 alert("비밀번호를 확인해주세요");
                 	 return false;
                  }
              }
              else{
-            	 console.log("4");
-                console.log(data);
                 alert("비밀번호를 확인해주세요");  
-                flag = false;
                 return false;
              }
           }
           
        }) 
-       console.log("5");
-       return flag;
 }
 
 </script>
@@ -198,7 +199,7 @@ function del_Chk(){
 		</form>
 		<div class ="div_del" style="display:inline-block; width:70%;">
 		<form action="del.mc" method="post" onsubmit="return del_Chk();" name="delform">
-			<input type="hidden" name=userid value=${uuser.userid }> 
+			<input type="hidden" name=userid value=${uuser.userid } id="userid"> 
 			<input type="password" name="pwd" required placeholder="비밀번호">
 			<input type="submit" value="회원탈퇴">
 		</form>

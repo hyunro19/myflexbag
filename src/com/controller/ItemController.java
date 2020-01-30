@@ -6,6 +6,7 @@ import java.util.Enumeration;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +30,13 @@ public class ItemController {
 	Service<String, PageVO> pservice;
 	
 	@RequestMapping("/iadd.mc")
-	public ModelAndView add(ModelAndView mv) {
+	public ModelAndView add(HttpSession session, ModelAndView mv) {
+		String id = (String) session.getAttribute("loginid");
+		if(!id.equals("admin")) {
+			mv.setViewName("ilist.mc");
+			return mv;
+		}
+
 		mv.addObject("center", "item/add");
 		mv.setViewName("main");
 		return mv;
@@ -37,6 +44,7 @@ public class ItemController {
 	
 	@RequestMapping("/iaddimpl.mc")
 	public String addimpl(ItemVO item) {
+		
 		if(item.getMf1()!=null ) { item.setImg1(item.getMf1().getOriginalFilename()); }
 		if(item.getMf2()!=null ) { item.setImg2(item.getMf2().getOriginalFilename()); }
 		if(item.getMf3()!=null ) { item.setImg3(item.getMf3().getOriginalFilename()); }
@@ -57,7 +65,11 @@ public class ItemController {
 	}
 	
 	@RequestMapping("/idel.mc")
-	public String delete(String pid) {
+	public String delete(HttpSession session, String pid) {
+		String id = (String) session.getAttribute("loginid");
+		if(!id.equals("admin")) {
+			return "redirect:ilist.mc";
+		}
 		try {
 			service.remove(pid);
 		} catch (Exception e) {
@@ -77,7 +89,12 @@ public class ItemController {
 	}
 	
 	@RequestMapping("/iupdate.mc")
-	public ModelAndView update(ModelAndView mv,	String pid) {
+	public ModelAndView update(ModelAndView mv,	String pid, HttpSession session) {
+		String id = (String) session.getAttribute("loginid");
+		if(!id.equals("admin")) {
+			mv.setViewName("ilist.mc");
+			return mv;
+		}
 		ItemVO item = null;
 		try {
 			item = service.get(pid);
@@ -115,13 +132,13 @@ public class ItemController {
 		ArrayList<ItemVO> list = null;
 		ArrayList<PageVO> plist = null;
 		try {
-			mv.addObject("pageprev",pageprev); // �씠�쟾 �럹�씠吏� �젙蹂� pagevo
+			mv.addObject("pageprev",pageprev);
 			pageprev.setTablename("Lproduct");
 
 			list = service.getall(vo);
 			plist = pservice.getall(pageprev);
 			
-			PageVO pagenext = plist.get(0); // �깉 �럹�씠吏� �젙蹂� pagevo
+			PageVO pagenext = plist.get(0);
 			pagenext.setPage(pageprev.getPage());
 			pagenext.calcData(pagenext.getPage(), pagenext.getPerPageNum());
 

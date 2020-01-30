@@ -92,7 +92,7 @@ public class MainController {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			
-			out.println("<script>alert('鍮꾨�踰덊샇媛� ���졇�뒿�땲�떎.'); location.href='login.mc'</script>");
+			out.println("<script>alert('비밀번호가 틀렸습니다.'); location.href='login.mc'</script>");
 			out.flush();
 			}
 		} catch(Exception e) {
@@ -101,7 +101,7 @@ public class MainController {
 			PrintWriter out;
 		try {
 			out = response.getWriter();
-			out.println("<script>alert('議댁옱�븯吏� �븡�뒗 �븘�씠�뵒�엯�땲�떎.'); location.href='login.mc'</script>");
+			out.println("<script>alert('존재하지 않는 아이디입니다.'); location.href='login.mc'</script>");
 			out.flush();
 		} catch (IOException e1) {
 			//e1.printStackTrace();
