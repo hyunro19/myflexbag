@@ -43,7 +43,6 @@
 					} else if ( result == 2) {
 						alert("로그인 후에 카트에 담을 수 있습니다.");
 					}
-				    
 				   },
 				error : function(){
 				alert("상품을 카트에 담는데 실패하였습니다.");
@@ -62,21 +61,23 @@
 <div id="page">
 	<div class="container">
 			<header id="masthead" class="site-header">
-				<ul id="top_nav">
 					<c:choose>
 						<c:when test="${loginid == null }">
+							<ul id="top_nav">
 							<li><a href="clist.mc">CART</a></li>
 							<li><a href="login.mc">LOGIN</a></li>
 							<li><a href="uadd.mc">REGISTER</a></li>
+							</ul>
 						</c:when>
 						<c:otherwise>
+							<ul id="top_nav">
 							<li><a href="clist.mc">CART</a></li>
 							<li><a href="mypage.mc">MY PAGE</a></li>
 							<li><a href="logout.mc">LOGOUT</a></li>
-							<li>${uname }님 반갑습니다!</li>
+							</ul>
+							<div style="text-align:right; padding-right:10px;"><br>${uname }님 반갑습니다!</div>
 						</c:otherwise>
 					</c:choose>
-				</ul>
 
 				<div class="site-branding">
 					<div id="logo">

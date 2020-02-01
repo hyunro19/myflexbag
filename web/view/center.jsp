@@ -17,7 +17,7 @@
 <div class="grid portfoliogrid">
 
 	<c:forEach var="l" items="${latest }">
-		<article class="hentry">
+		<article class="hentry col-sm-12">
 			<header class="entry-header">
 				<div class="entry-thumbnail">
 					<div id="lab1"> <div id="lab2"> <div id="lab3">
@@ -46,7 +46,7 @@
 <div class="grid portfoliogrid">
 
 	<c:forEach var="b" items="${best }">
-		<article class="hentry">
+		<article class="hentry col-sm-12">
 			<header class="entry-header">
 				<div class="entry-thumbnail">
 					<div id="lab1"> <div id="lab2"> <div id="lab3">
@@ -65,9 +65,9 @@
 			</header>
 		</article>
 	</c:forEach>
-
+ 
 </div>
-
+ 
 <!-- The Modal -->
     
 <div class="col-md-6 col-lg-4">

@@ -714,7 +714,10 @@ a:active,a:focus {
 .bypostauthor {
 }
 .hentry {
-	margin: 0 0 3.5em;
+	margin: 0 0 3.5em 15%;
+	position:absolute;
+	left:0;
+	top:0;
 }
 .single-post .hentry {
     margin: 0 0 1.5em;
@@ -2156,8 +2159,7 @@ a.portfoliotype:last-child:after {
 }
 .woocommerce ul.products li.product:hover {
 	border:1px solid #eee;
-	padding:20px;
-	transition:all 0.3s;
+
 }
 .woocommerce ul.products li.product h3 {
 	font-size:1.1em;
@@ -2348,18 +2350,23 @@ h1, h2, h3, h4, h5, h6 {
 	overflow: hidden;
 	position: relative;
 	}
-	#lab2 {
-		
-		position: absolute;
-		top:0;
-		bottom:0;
-	}
-	#lab3 {
+#lab2 {		
+	position: absolute;
+	top:0;
+	bottom:0;
+}
+.hentry #lab2 {
+	left:10%;
+}
+#lab3 {
 	height: 100%;
 	text-align:center;
-	}
+}
+#lab3:hover {
+	padding:10px 20px 10px 20px;
+	transition:all 0.3s;
+}
 
-	#orderdetailcontainer th, #orderdetailcontainer td{
-		text-align:center;
-
-	}
+#orderdetailcontainer th, #orderdetailcontainer td{
+	text-align:center;
+}
