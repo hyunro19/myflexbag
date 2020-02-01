@@ -10,7 +10,6 @@ public interface OrderDetailMapper {
 	public void update(OrderDetailVO obj);
 	public OrderDetailVO select(String obj);
 	public ArrayList<OrderDetailVO> selectall(OrderDetailVO obj);
-	public void clear();
 }
 
 

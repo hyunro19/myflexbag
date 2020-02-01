@@ -15,7 +15,7 @@
 		
 		<label>상품번호</label> 
 		<div class="div_text">
-		<input type="text" name="pid" value="${pid }" readonly="readonly"><br>
+		<input type="text" name="pid" value="${ureview.pid }" readonly="readonly"><br>
 		</div>
 		
 		<label>제목</label>
@@ -28,7 +28,7 @@
 		<textarea cols="50" rows="5" name="rvcon" style="width:60%; resize:none; height:20em;">${ureview.rvcon}</textarea> <br>
 		</div>
 		
-		<input class="btn" type="submit" value="UPDATE"><br>
+		<input class="btn" type="submit" value="UPDATE"> 
 		<input class="btn" type="button" value="CANCEL" onclick="mypage()"><br>
 
 	</form>

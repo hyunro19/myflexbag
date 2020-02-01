@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 <mapper namespace="com.mapper.ItemMapper">
 	
 	<insert id="insert" parameterType="item">
-		INSERT INTO Lproduct VALUES (Lproduct_seq.nextval,#{cateid},#{sizeid},#{colorid},#{brandid},#{matid},#{pname},#{price},#{pstock},sysdate,#{img1},#{img2},#{img3},#{img4},#{img5})	
+		INSERT INTO Lproduct VALUES (null,#{cateid},#{sizeid},#{colorid},#{brandid},#{matid},#{pname},#{price},#{pstock},sysdate(),#{img1},#{img2},#{img3},#{img4},#{img5})	
 	</insert>
 	
 	<update id="update" parameterType="item">
@@ -15,7 +15,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</update>
 	
 	<delete id="delete" parameterType="String">
-		DELETE FROM Lproduct WHERE PID=#{pid} <!-- obj? pid?  -->
+		DELETE FROM Lproduct WHERE PID=#{pid}
 	</delete>
 	
 	<select id="select" parameterType="String" resultType="item">
@@ -23,26 +23,23 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectall" resultType="item">
-		SELECT * FROM (
-			SELECT rownum rnum, pid, cateid, sizeid, colorid, brandid, matid, pname, price, pstock, pdate, img1, img2, img3, img4, img5 FROM 
-			( 
-				SELECT *  FROM Lproduct WHERE 1 = 1 
+		SELECT *  FROM Lproduct WHERE 1 = 1 
+
+		<if test="cateid != null"> AND  cateid = #{cateid}	</if>
+		<if test="cateid == ''"> </if>
 		
-				<if test="cateid != null"> AND  cateid = #{cateid}	</if>
-				<if test="cateid == ''"> </if>
+		<if test="brandid != null"> AND  brandid = #{brandid}	</if>
+		<if test="brandid == ''"> </if>
+
+		<if test="matid != null"> AND  matid = #{matid}	</if>
+		<if test="matid == ''"> </if>
 				
-				<if test="brandid != null"> AND  brandid = #{brandid}	</if>
-				<if test="brandid == ''"> </if>
-		
-				<if test="matid != null"> AND  matid = #{matid}	</if>
-				<if test="matid == ''"> </if>
-						
-				<if test="sortcon == 'popularity'"> ORDER BY pstock ASC </if> 
-				<if test="sortcon == 'pdate'"> ORDER BY pdate DESC	</if> 
-				<if test="sortcon == 'priceasc'"> ORDER BY price ASC </if> 
-				<if test="sortcon == 'pricedesc'"> ORDER BY price DESC </if> 
-			) 
-		) WHERE rnum between #{pageStart} and #{pageEnd}
+		<if test="sortcon == 'popularity'"> ORDER BY pstock ASC </if> 
+		<if test="sortcon == 'pdate'"> ORDER BY pdate DESC	</if> 
+		<if test="sortcon == 'priceasc'"> ORDER BY price ASC </if> 
+		<if test="sortcon == 'pricedesc'"> ORDER BY price DESC </if> 
+
+		limit #{pageStart}, #{perPageNum} 
 	</select>
 	
 </mapper>

@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	
 	<insert id="insert" parameterType="user">
 		INSERT INTO USERS (userid, pwd, uno, uname,gender,phone,email,address,birthdate)
-      		  	VALUES (#{userid}, #{pwd},seq_user.nextval,#{uname},#{gender}, #{phone}, #{email}, #{address},#{birthdate})
+      		  	VALUES (#{userid}, #{pwd},null,#{uname},#{gender}, #{phone}, #{email}, #{address},#{birthdate})
 	</insert>
 	
 	<update id="update" parameterType="user">
@@ -20,11 +20,11 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</update>
 	
 	<delete id="delete" parameterType="String">
-		DELETE FROM USERS WHERE USERID=#{obj}
+		DELETE FROM USERS WHERE USERID=#{userid}
 	</delete>
 	
 	<select id="select" parameterType="String" resultType="user">
-		SELECT * FROM USERS WHERE USERID=#{obj}	
+		SELECT * FROM USERS WHERE USERID=#{userid}	
 	</select>
 	
 	<select id="selectall" resultType="user">

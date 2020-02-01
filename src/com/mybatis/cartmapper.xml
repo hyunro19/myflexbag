@@ -5,47 +5,33 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 <mapper namespace="com.mapper.CartMapper">
    
    <insert id="insert" parameterType="cart">
-	INSERT INTO lcart (cartno, 
-    userid,
-    pid, 
-    pname,
-    pnum,
-    cdate,
-    img,
-    price)
-   SELECT SEQ_CARTNO.NEXTVAL,
-     userid,
-    pid, 
-    pname,
-    pnum,
-    cdate,
-    img,
-    price
-   FROM (SELECT #{userid} userid,
-               #{pid} pid,
-               pname pname,
-               #{pnum} pnum,
-               sysdate cdate,
-               img1 img,
-               price price
-   from lproduct where pid = #{pid})
+	INSERT INTO Lcart (cartno, userid, pid, pname, pnum, cdate, img, price)
+		   			 SELECT null, userid, pid, pname, pnum, cdate, img, price
+   		    	FROM (SELECT #{userid} AS userid, 
+							#{pid} AS pid,
+							pname AS pname,
+							#{pnum} AS pnum,
+							sysdate() AS cdate,
+							img1 AS img,
+							price AS price
+   							from Lproduct where pid = #{pid}) temp
    </insert>
    
    <delete id="delete" parameterType="String">
-      DELETE FROM LCART WHERE CARTNO=#{cartno}
+      DELETE FROM Lcart WHERE CARTNO=#{cartno}
    </delete>
 
    <update id="update" parameterType="cart">
-      UPDATE LCART SET PNUM=#{pnum} WHERE PID=#{pid} AND USERID=#{userid}
+      UPDATE Lcart SET PNUM=#{pnum} WHERE PID=#{pid} AND USERID=#{userid}
    </update>
    
    <select id="select" parameterType="Integer" 
 	resultType="cart">
-		SELECT * FROM LCART WHERE PID=#{pid}	
+		SELECT * FROM Lcart WHERE PID=#{pid}	
 	</select>
 
    <select id="selectall" resultType="cart">
-      SELECT * FROM LCART WHERE userid =#{userid}
+      SELECT * FROM Lcart WHERE userid =#{userid}
    </select>
    
 </mapper>

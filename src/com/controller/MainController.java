@@ -31,7 +31,7 @@ public class MainController {
 	Service<String, ItemVO> iservice;
 	
 	@RequestMapping("/main.mc")
-	public ModelAndView main() {
+	public ModelAndView main(ModelAndView mv) {
 		ItemVO bestVO = new ItemVO();
 		ItemVO latestVO = new ItemVO();
 		
@@ -52,7 +52,6 @@ public class MainController {
 			e.printStackTrace();
 		}
 		
-		ModelAndView mv = new ModelAndView();
 		mv.addObject("best", bestList);
 		mv.addObject("latest", latestList);
 		mv.setViewName("main");
@@ -68,19 +67,18 @@ public class MainController {
 	}
 	
 	@RequestMapping("/logout.mc")
-	public ModelAndView logout(HttpSession session) {
+	public String logout(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		if (session != null) {
 			session.invalidate();
 		}
-		mv.setViewName("main");
-		return mv;
+		return "redirect:main.mc";
 	}
 	
 	@RequestMapping(value = "/login.mc", method = RequestMethod.POST)
-	public ModelAndView loginimpl(UserVO dbuser, ModelAndView mv, HttpServletResponse response, HttpSession session, String userid, String pwd)
+	public String loginimpl(UserVO dbuser, ModelAndView mv, HttpServletResponse response, HttpSession session, String userid, String pwd)
 			throws Exception {
-		dbuser = service.get(userid);
+			dbuser = service.get(userid);
 		try {
 			if ( dbuser.getPwd().equals(pwd)) {
 
@@ -108,9 +106,7 @@ public class MainController {
 		}	
 		//e.printStackTrace();
 		}
-		mv.addObject("center","center");
-		mv.setViewName("main");
-		return mv;
+		return "redirect:main.mc";
 		
 
 	}

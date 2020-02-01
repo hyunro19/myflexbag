@@ -26,6 +26,10 @@
 	    	alert("'sample'계정은 수정할 수 없습니다.")
 	    	return false;
 	    }
+	    if (userid == 'admin') {
+	    	alert("'admin'계정은 수정할 수 없습니다.")
+	    	return false;
+	    }
 	    
 		var form = document.userInfo;
 
@@ -98,6 +102,10 @@ function del_Chk(){
     var pwd = $('#pwd').val();
     if (userid == 'sample') {
     	alert("'sample'계정은 탈퇴할 수 없습니다.")
+    	return false;
+    }
+    if (userid == 'admin') {
+    	alert("'admin'계정은 탈퇴할 수 없습니다.")
     	return false;
     }
 

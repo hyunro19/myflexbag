@@ -4,24 +4,6 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mapper.PageMapper">
 	
-	<insert id="insert" parameterType="item">
-		INSERT INTO Lproduct VALUES (Lproduct_seq.nextval,#{cateid},#{sizeid},#{colorid},#{brandid},#{matid},#{pname},#{price},#{pstock},sysdate,#{img1},#{img2},#{img3},#{img4},#{img5})	
-	</insert>
-	
-	<update id="update" parameterType="item">
-		UPDATE Lproduct SET 
-			cateid=#{cateid},sizeid=#{sizeid},colorid=#{colorid},brandid=#{brandid},matid=#{matid},pname=#{pname},price=#{price},pstock=#{pstock},img1=#{img1},img2=#{img2},img3=#{img3},img4=#{img4},img5=#{img5}
-		WHERE PID=#{pid}
-	</update>
-	
-	<delete id="delete" parameterType="String">
-		DELETE FROM Lproduct WHERE PID=#{pid}
-	</delete>
-	
-	<select id="select" parameterType="String" resultType="page">
-		SELECT count(*) totalcount FROM Lproduct		
-	</select>
-	
 	<select id="selectall" resultType="page">
 		SELECT count(*) totalcount FROM ${tablename} WHERE 1 = 1
 		<if test="userid != null"> AND  userid = #{userid}	</if>

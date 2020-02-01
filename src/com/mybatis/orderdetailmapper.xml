@@ -6,20 +6,24 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 
 	<!-- 주문 상세 정보 -->
 	<insert id="insert">	
-		INSERT INTO LDETAIL VALUES (seq_odno.nextval, #{orderno}, #{pid}, #{unitprice}, #{quantity}, #{mprice})
+		INSERT INTO Ldetail VALUES(null, #{orderno}, #{pid}, #{unitprice}, #{quantity}, #{mprice})
 	</insert>
 
-	<delete id="clear">
-		DELETE * FROM LORDER
+	<delete id="delete">
+ 
+	</delete>
+	
+	<delete id="update">
+ 
 	</delete>
 
-	<select id="selectallorder" resultType="odetail">
-		SELECT * FROM LORDER
+	<select id="select" resultType="odetail">
+		SELECT * FROM LORDER WHERE orderdetailno=#{orderdetailno}
 	</select>
 
 	<select id="selectall" resultType="odetail">
-    	SELECT * FROM LDETAIL where ORDERNO=#{orderno} ORDER BY orderdetailno DESC
-   	</select>
+		SELECT * FROM Ldetail where ORDERNO=#{orderno} ORDER BY orderdetailno DESC
+	</select>
 
 </mapper>
 

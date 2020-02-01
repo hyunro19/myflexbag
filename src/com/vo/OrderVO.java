@@ -130,11 +130,11 @@ public class OrderVO {
 	
 	// method for MyBatis SQL Mapper -
 	public int getPageStart() {		
-		return ( (this.page -1) * perPageNum + 1 );
+		return ( (this.page -1) * perPageNum);
 	}
 	
 	public int getPageEnd() {
-		return (this.page * perPageNum);
+		return (this.page * perPageNum + 1 );
 	}
 	
 	

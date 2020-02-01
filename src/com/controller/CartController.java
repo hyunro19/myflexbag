@@ -14,17 +14,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.frame.Service;
+import com.frame.ServiceO;
 import com.vo.CartVO;
 import com.vo.OrderDetailVO;
 import com.vo.OrderVO;
 import com.vo.PageVO;
 import com.vo.UserVO;
-import com.frame.Service;
-import com.frame.ServiceO;
 
 @Controller
 public class CartController {
-
 	@Resource(name = "cservice")
 	Service<String, CartVO> service;
 
@@ -43,12 +42,16 @@ public class CartController {
 	@ResponseBody
 	@RequestMapping(value = "/cadd.mc", method = RequestMethod.POST)
 	public int addCart(HttpSession session, CartVO vo) throws Exception {
-		int result = 0;
+		int result = 2;
 		int pid = vo.getPid();
 		if(session.getAttribute("loginid") != null) {
-			vo.setUserid((String)session.getAttribute("loginid"));
-			ArrayList<CartVO> clist = service.getall(vo);
-
+			vo.setUserid( (String)session.getAttribute("loginid") );
+			ArrayList<CartVO> clist;			
+			clist = service.getall(vo);
+			if(clist.size()==0) {
+				service.register(vo);
+				return 1;
+			}
 			boolean flag = false;
 			for (CartVO cvo : clist) {
 				flag = false;
@@ -61,32 +64,33 @@ public class CartController {
 					flag = true;
 				}
 			}
-			if(flag || clist.size()==0 ) service.register(vo);
+			if(flag) {
+				service.register(vo);
+			}
 			result = 1;
-		} else if (session.getAttribute("loginid") == null ) {
-			result = 2;
-		}
+		}		
 		return result;
 	}
 	
 	@RequestMapping("/clist.mc")
-	public ModelAndView list(HttpSession session, ModelAndView mv, CartVO vo) {
-		ArrayList<CartVO> list = null;
-		if(session.getAttribute("loginid") == null) {
-			mv.addObject("center", "login");
-			mv.setViewName("main");
-			return mv;
-		}
-		try {
-			vo.setUserid((String)session.getAttribute("loginid"));
-			list = service.getall(vo);
+	public ModelAndView clist(HttpSession session, ModelAndView mv, CartVO vo) {
+		if(session.getAttribute("loginid") != null) {
+			ArrayList<CartVO> list = null;		
+			try {
+				vo.setUserid( (String)session.getAttribute("loginid") );
+				list = service.getall(vo);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			mv.addObject("clist", list);
 			mv.addObject("center", "cart/list");
 			mv.setViewName("main");
-		} catch (Exception e) {
-			e.printStackTrace();
+			return mv;			
+		} else if(session.getAttribute("loginid") == null) {
+				mv.addObject("center", "login");
+				mv.setViewName("main");
+				return mv;
 		}
-
 		return mv;
 	}
 
@@ -126,22 +130,19 @@ public class CartController {
 	
 	@RequestMapping("/orderCart.mc")
 	public ModelAndView orderCart(HttpSession session, ModelAndView mv, 
-			@RequestParam(value="amount", defaultValue="0", required=false) int amount, CartVO vo, UserVO user) {
+			@RequestParam(value="amount", defaultValue="0", required=false) int amount, CartVO vo, UserVO user) throws Exception {
 		
 		ArrayList<CartVO> list = null;
 		String userid = (String)session.getAttribute("loginid");
 		vo.setUserid(userid);
-		try {
-			list = service.getall(vo);
-			user = uservice.get(userid);
-			mv.addObject("amount", amount);
-			mv.addObject("olist", list);
-			mv.addObject("ouser", user);
-			mv.addObject("center", "cart/order");
-			mv.setViewName("main");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		list = service.getall(vo);
+		user = uservice.get(userid);
+		mv.addObject("amount", amount);
+		mv.addObject("olist", list);
+		mv.addObject("ouser", user);
+		mv.addObject("center", "cart/order");
+		mv.setViewName("main");
+
 		return mv;
 	}
 	
@@ -232,5 +233,4 @@ public class CartController {
 
 	   return mv;
 	}
-	
 }

@@ -5,32 +5,28 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 <mapper namespace="com.mapper.BoardMapper">
 	
 	<insert id="insert" parameterType="board">
-		INSERT INTO LBOARD (bno,userid,bkind,bdate,btitle,bcon)
-		VALUES (seq_bno.nextval,#{userid}, #{bkind},sysdate,#{btitle},#{bcon})
+		INSERT INTO Lboard (bno,userid,bkind,bdate,btitle,bcon)
+		VALUES (null,#{userid}, #{bkind},sysdate(),#{btitle},#{bcon})
 	</insert>
 	
 	<update id="update" parameterType="board">
-		UPDATE LBOARD SET BTITLE=#{btitle},BCON=#{bcon},BKIND=#{bkind} WHERE BNO=#{bno}		
+		UPDATE Lboard SET BTITLE=#{btitle},BCON=#{bcon},BKIND=#{bkind} WHERE BNO=#{bno}		
 	</update>
 	
 	<delete id="delete" parameterType="String">
-		DELETE FROM LBOARD WHERE BNO=#{bno}
+		DELETE FROM Lboard WHERE BNO=#{bno}
 	</delete>
 	
 	<select id="select" parameterType="String" resultType="board">
-		SELECT * FROM LBOARD WHERE BNO=#{bno}	
+		SELECT * FROM Lboard WHERE BNO=#{bno}	
 	</select>
 
 	<select id="selectall" resultType="board">
-		SELECT * FROM (
-			SELECT rownum rnum, bno, userid, bkind, bdate, btitle, bcon FROM 
-				( 
-					SELECT * FROM Lboard WHERE 1=1
-					<if test="bkind != null"> AND  bkind = #{bkind}	</if>
-					<if test="userid!=null"> AND userid = #{userid} </if>
-					ORDER BY bdate DESC
-				) 
-			) <if test="pageStart != null"> WHERE rnum between #{pageStart} and #{pageEnd} </if>
+		SELECT * FROM Lboard WHERE 1=1
+		<if test="bkind != null"> AND  bkind = #{bkind}	</if>
+		<if test="userid!=null"> AND userid = #{userid} </if>
+		ORDER BY bdate DESC
+		<if test="pageStart != null"> limit #{pageStart}, #{perPageNum} </if>
 	</select>
 
 </mapper>

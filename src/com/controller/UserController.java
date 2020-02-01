@@ -51,10 +51,9 @@ public class UserController {
 	}
 	
 	@RequestMapping("/uaddimpl.mc")
-	public ModelAndView addimpl(UserVO user,ModelAndView mv,HttpServletResponse response) {
+	public ModelAndView addimpl(UserVO user, ModelAndView mv,HttpServletResponse response, HttpSession session) {
 		try {
 			service.register(user);
-			
 			response.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();

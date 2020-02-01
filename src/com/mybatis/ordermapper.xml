@@ -4,27 +4,25 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mapper.OrderMapper">
 	<select id = "selectall" resultType="order">
-		SELECT * FROM (
-			SELECT rownum rnum, orderno, userid, payid, deliid, odate, receiver, orderphon, address, quantitysum, pricesum, gender FROM 
-			( 
-			SELECT * FROM Lorder WHERE userid=#{userid} ORDER BY ODATE DESC
-			) 
-		) WHERE rnum between #{pageStart} and #{pageEnd}	
+		SELECT * FROM Lorder 
+		WHERE userid=#{userid} 
+		ORDER BY ODATE DESC 
+		limit #{pageStart}, #{perPageNum} 
 	</select>
 	
 	<insert id="insert" parameterType="order">
-			INSERT INTO LORDER VALUES
-			(SEQ_ORDERNO.NEXTVAL, #{userid}, #{payid}, '배송현황(배송중)', SYSDATE,
-			#{receiver}, #{orderphon},
-			#{address}, #{quantitysum}, #{pricesum}, #{gender})
+		INSERT INTO Lorder VALUES
+		(NULL, #{userid}, #{payid}, '배송현황(배송중)', SYSDATE(),
+		#{receiver}, #{orderphon},
+		#{address}, #{quantitysum}, #{pricesum}, #{gender})
 		 
 		<selectKey keyProperty="orderno" resultType="Integer" order="AFTER"> 
-			select seq_orderno.currval from dual
+			SELECT LAST_INSERT_ID()
 		</selectKey> 
 	</insert>
 
 	<delete id="delete">
-		DELETE * FROM LORDER
+		DELETE * FROM Lorder WHERE orderno=#{orderno}
 	</delete>
 	
 </mapper>
