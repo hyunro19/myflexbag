@@ -201,7 +201,7 @@ public class CartController {
 	        od.setUserid(userid);
 	        orderList = oservice.getall(od);
 	        plist = pservice.getall(pageprev);
-	        
+        
 			PageVO pagenext = plist.get(0);
 			pagenext.setPage(pageprev.getPage());
 			pagenext.calcData(pagenext.getPage(), pagenext.getPerPageNum());

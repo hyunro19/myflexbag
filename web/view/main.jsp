@@ -23,6 +23,11 @@
 <link rel='stylesheet' href='view/css/bootstrap-theme.min.css' type='text/css' media='all'/>
 <link rel='stylesheet' href='view/css/bootstrap.css' type='text/css' media='all'/>
 
+<link rel="icon" type="image/png" sizes="32x32" href="view/img/favicon_32.png" />
+<link rel="icon" type="image/png" sizes="196x196" href="view/img/favicon_16.png" />
+<link rel="shortcut icon" type="image/png" sizes="32x32" href="view/img/favicon_16.png" />
+<link rel="shortcut icon" type="image/png" sizes="32x32" href="view/img/favicon_32.png" />
+
 <script>
 	window.onload = function(){
 		$(".single_add_to_cart_button").click(function(){

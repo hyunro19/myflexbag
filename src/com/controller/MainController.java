@@ -97,13 +97,13 @@ public class MainController {
 			response.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out;
-		try {
-			out = response.getWriter();
-			out.println("<script>alert('존재하지 않는 아이디입니다.'); location.href='login.mc'</script>");
-			out.flush();
-		} catch (IOException e1) {
-			//e1.printStackTrace();
-		}	
+			try {
+				out = response.getWriter();
+				out.println("<script>alert('존재하지 않는 아이디입니다.'); location.href='login.mc'</script>");
+				out.flush();
+			} catch (IOException e1) {
+				//e1.printStackTrace();
+			}	
 		//e.printStackTrace();
 		}
 		return "redirect:main.mc";

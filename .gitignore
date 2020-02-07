@@ -118,7 +118,8 @@ local.properties
 
 .sts4-cache/
 
-web/view/dashboard/
+src/com/app/*.txt
+
 
 
 

@@ -33,7 +33,7 @@ public class ItemController {
 	public ModelAndView add(HttpSession session, ModelAndView mv) {
 		String id = (String) session.getAttribute("loginid");
 		if(!id.equals("admin")) {
-			mv.setViewName("ilist.mc");
+			mv.setViewName("main");
 			return mv;
 		}
 

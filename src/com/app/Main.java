@@ -6,17 +6,17 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		// "www.balaan.co.kr"¿¡¼­ »óÇ°»ó¼¼ ÆäÀÌÁö ÁÖ¼Ò¸¦ list.txt¿¡ ÀúÀå
-//		String url;
-//		for (int i=1; i<=20; i++) {
-//			url = "http://www.balaan.co.kr/m2/goods/list.php?searchType=&category=010004&brandno=&keyword=&f_category=010004&f_price[]=&f_price[]=&f_delivery=&sort=&from=&page="
-//					+i;
-//			List<String> list = CrawlingList.crawling(url);
-//			TxtWriter.write("list", list);
-//		}
+		// "www.balaan.co.kr"ì—ì„œ ì´ë¯¸ì§€ ê°€ì ¸ì˜¤ê¸°
+		// CrawlingList â†’ TxtWriter ìˆœìœ¼ë¡œ ì‹¤í–‰
+		String url;
+		for (int i=1; i<=20; i++) {
+			url = "http://myflexbag.com/list.mc?page="+i;
+			List<String> list = CrawlingList.crawling(url);
+			TxtWriter.write("list", list);
+		}
 
-		// °¢ »óÇ° »ó¼¼ ÆäÀÌÁö¿¡¼­ ÀÌ¹ÌÁö 5°³¾¿ °¡Á®¿À±â
-//		TxtReader.read("list");
+		// TextReader â†’ CrawlingItem â†’ SqlGen ìˆœìœ¼ë¡œ ì‹¤í–‰ (ë¹„ë™ê¸° ë¬¸ì œë¡œ ì½œë°± ë°©ì‹ìœ¼ë¡œ êµ¬í˜„)
+		TxtReader.read("list");
 
 	}
 

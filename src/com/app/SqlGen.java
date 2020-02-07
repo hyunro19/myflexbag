@@ -15,7 +15,6 @@ public class SqlGen {
 		String[] imgs = new String[5];
 		String sql;
 		
-		// 제품 테이블에서 이미지 외 다른 속성들은 랜덤으로 추출
 		String[] cateids = new String[]{"shoulder","tote","backpack","messenger","clutch","wallet","etc"};
 		String[] sizeids = new String[]{"free","small","medium","large"};
 		String[] colorids = new String[]{"balck","blue","red","green","yellow","orange","pink","navy","grey", "etc"};
@@ -35,8 +34,8 @@ public class SqlGen {
 			if ( imageUrls.get(i)!=null ) imgs[i] = imageUrls.get(i);
 		}
 		
-		sql = "INSERT INTO Lproduct VALUES(Lproduct_seq.nextval, "
-				+"'"+cateid+"', '"+sizeid+"', '"+colorid+"', '"+brandid+"', '"+matid+"', '"+pname+"', '"+price+"', '"+pstock+"', sysdate, '"+imgs[0]+"', '"+imgs[1]+"', '"+imgs[2]+"', '"+imgs[3]+"', '"+imgs[4] +"'); \n";
+		sql = "INSERT INTO Lproduct VALUES(null, "
+				+"'"+cateid+"', '"+sizeid+"', '"+colorid+"', '"+brandid+"', '"+matid+"', '"+pname+"', '"+price+"', '"+pstock+"', sysdate(), '"+imgs[0]+"', '"+imgs[1]+"', '"+imgs[2]+"', '"+imgs[3]+"', '"+imgs[4] +"'); \n";
 				
 		TxtWriter.write("sqls", sql);
 	}

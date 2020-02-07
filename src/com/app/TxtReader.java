@@ -9,29 +9,25 @@ public class TxtReader {
     public static void read(String filename) {
 	   
 	     try{
-	            //ÆÄÀÏ °´Ã¼ »ý¼º
-	            File file = new File("C:/Users/DU Kang/mygithubprojects/myflexbag/src/com/app/"+filename+".txt");
-	            //ÀÔ·Â ½ºÆ®¸² »ý¼º
-	            FileReader filereader = new FileReader(file);
-	            //ÀÔ·Â ¹öÆÛ »ý¼º
-	            BufferedReader bufReader = new BufferedReader(filereader);
-	            String line = "";
-	            int i = 0;
-	            while((line = bufReader.readLine()) != null){
-	            	i++;
-	            	if(i<1800) continue;
+			File file = new File("./"+filename+".txt");
+			FileReader filereader = new FileReader(file);
+			BufferedReader bufReader = new BufferedReader(filereader);
+			String line = "";
+			int i = 0;
+			while((line = bufReader.readLine()) != null){
+				i++;
+				if(i<1800) continue;
 
-	            	CrawlingItem.crawling(line);
-	            	if (i % 50 == 0) System.out.println(i+"¹øÂ° ÁÙ ÀÐ´Â Áß...");
-	            	if (i % 100 == 0) {
-	            		Thread.sleep(5000);	            		
-	            	}; //Àá±ñ ½¬ÀÚ                              
-	            }
-	            //.readLine()Àº ³¡¿¡ °³Çà¹®ÀÚ¸¦ ÀÐÁö ¾Ê´Â´Ù.            
-	            bufReader.close();
-	        } catch (Exception e){
-	        	e.printStackTrace();
-	        }
+				CrawlingItem.crawling(line);
+				if (i % 50 == 0) System.out.println(i+"ë²ˆì§¸ ìƒí’ˆì„ ì§„í–‰í•˜ê³  ìžˆìŠµë‹ˆë‹¤...");
+				if (i % 100 == 0) {
+					Thread.sleep(5000);	            		
+				};
+			}
+			bufReader.close();
+		} catch (Exception e){
+			e.printStackTrace();
+		}
 
     }
     

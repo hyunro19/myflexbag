@@ -17,18 +17,16 @@ public class CrawlingItem {
 
 		try {
 			doc = Jsoup.connect(url).timeout(1000000).get();
-			// lz-lazyload Å¬·¡½º¸¦ °¡Áø imgµé ÃßÃâ
+			// ì¶”ì¶œí•  ì´ë¯¸ì§€ urlë§Œ í•´ë‹¹ë˜ëŠ” íƒœê·¸, ì†ì„±ì„ ê¸°ì¤€ìœ¼ë¡œ ì…€ë ‰í„° ì„¤ì •
 			imgs = doc.select("div[class=content] > div[class=images] > img"); 
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		// ÀÌ¹ÌÁö ÁÖ¼Ò¸¦ ´ãÀ» ¸®½ºÆ® »ı¼º
 		List<String> imageUrls = new ArrayList<>();
 		
 		for (Element img : imgs) {
 			String temp;
-			// ÀÌ¹ÌÁöÁÖ¼Ò°¡ nullÀÌ°Å³ª ""ÀÎ °æ¿ì´Â ¸®½ºÆ®¿¡ ³ÖÁö ¾Ê°í ÆĞ½º
 			if (img.attr("abs:src") == "" || img.attr("abs:src") == null) continue;
 			else temp = img.attr("abs:src");
 			imageUrls.add(temp);
