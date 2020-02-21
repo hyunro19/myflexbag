@@ -5822,7 +5822,7 @@ button.close {
 }
 @media (min-width: 768px) {
   .modal-dialog {
-    width: 300px;
+    width: 400px;
     margin: 40px auto;
   }
   .modal-content {
