@@ -6,7 +6,7 @@
 
 
 
-### [AWS로 배포한 MyFlexBag 방문하기](https://52.79.157.226:8080/myflexbag)
+### [AWS로 배포한 MyFlexBag 방문하기](http://52.79.157.226:8080/myflexbag)
 
 
 
